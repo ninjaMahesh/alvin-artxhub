@@ -438,6 +438,10 @@ $('#validate_invitation_code').on('click', function (event) {
                 hideLoader();
                 // response = JSON.parse(response);
                 if(response.success === true){
+                    var userId = response.data.user_id;
+                    console.log('userId: ' , userId);
+                    // console.log(userId);
+                    $("#crnt_usr_id").val(userId);
                     $("#personal-details-container").hide();
                     $('#select-group-container').show();
                         nextStep(2); 
@@ -478,7 +482,7 @@ $('#validate_invitation_code').on('click', function (event) {
             url: ajax_object.ajax_url,
             type: 'post', 
             data:{
-                action: 'join_buddypress_group',
+                action: 'join_buddypress_groups',
                 group_ids: selectedGroups,
                 user_id : userID
             },
@@ -488,7 +492,6 @@ $('#validate_invitation_code').on('click', function (event) {
                     $('#select-group-container').hide();
                     $('#upload-file-container').show();
                         nextStep(3); 
-
                     // window.location.href = response.data.redirect_url;
                 } else{
                     let data = response.data;
@@ -520,7 +523,7 @@ $('#validate_invitation_code').on('click', function (event) {
         // Perform AJAX request
         showLoader();
         $.ajax({
-            url: ajaxurl,  // Ensure ajaxurl is defined in your theme or plugin
+            url: ajax_object.ajax_url,  // Ensure ajaxurl is defined in your theme or plugin
             type: 'POST',
             data: formData,
             contentType: false,  // Required for file upload
@@ -534,8 +537,9 @@ $('#validate_invitation_code').on('click', function (event) {
 
                     // Show points earned in an alert
                     alert(`You have earned ${totalPoints} points so far!`);
-
-                     window.location.href = response.data.post_url;
+                    $("#featured-story-container").hide();
+                    $('#thankyou-page-container').show();
+                    //  window.location.href = response.data.post_url;
                 } else {
                     alert("Error occurred while creating story: " + response.data.message);
                 }

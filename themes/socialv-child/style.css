@@ -149,10 +149,6 @@ Use it to make something cool, have fun, and share what you've learned with othe
 /*    display:none;*/
 /*}*/
 
-#code-validation-container {
-    /*display:none;*/
-}
-
 #upload-file-container {
     display: none;
 }
@@ -273,10 +269,21 @@ Use it to make something cool, have fun, and share what you've learned with othe
 .f-form {
     width: 100%;
     height: 100vh;
-    background-image: url("http://localhost/artxhub/wp-content/themes/socialv-child/images/artx-page1.png") !important;
+    background-image: url("https://artxhub.com/wp-content/themes/socialv-child/images/artx-page1.png") !important;
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
+}
+.thankyou-page-container{
+    background-image: url("https://artxhub.com/wp-content/themes/socialv-child/images/artx-page1.png") !important;
+    width: 100%;
+    height: 100vh;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+#thankyou-page-container{
+    display: none;
 }
 
 .form-common input::placeholder {
@@ -299,7 +306,7 @@ Use it to make something cool, have fun, and share what you've learned with othe
 .sd-form {
     width: 100%;
     height: 100vh;
-    background-image: url("http://localhost/artxhub/wp-content/themes/socialv-child/images/secondpage.png") !important;
+    background-image: url("https://artxhub.com/wp-content/themes/socialv-child/images/secondpage.png") !important;
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
@@ -309,7 +316,7 @@ Use it to make something cool, have fun, and share what you've learned with othe
     width: 100%;
     height: 100vh;
     overflow: hidden;
-    background-image: url("http://localhost/artxhub/wp-content/themes/socialv-child/images/forthpage.png") !important;
+    background-image: url("https://artxhub.com/wp-content/themes/socialv-child/images/forthpage.png") !important;
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
@@ -324,7 +331,7 @@ Use it to make something cool, have fun, and share what you've learned with othe
 .TR-form {
     width: 100%;
     height: 100vh;
-    background-image: url("http://localhost/artxhub/wp-content/themes/socialv-child/images/thirdpage.png") !important;
+    background-image: url("https://artxhub.com/wp-content/themes/socialv-child/images/thirdpage.png") !important;
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
@@ -334,7 +341,7 @@ Use it to make something cool, have fun, and share what you've learned with othe
 .FL-form {
     width: 100%;
     height: 100vh;
-    background-image: url("http://localhost/artxhub/wp-content/themes/socialv-child/images/fifthPage.png") !important;
+    background-image: url("https://artxhub.com/wp-content/themes/socialv-child/images/fifthPage.png") !important;
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
@@ -342,7 +349,7 @@ Use it to make something cool, have fun, and share what you've learned with othe
 
 .select_bp_group {
     appearance: none;
-    background-image: url('http://localhost/artxhub/wp-content/themes/socialv-child/images/Vector.svg');
+    background-image: url('https://artxhub.com/wp-content/themes/socialv-child/images/Vector.svg');
     background-repeat: no-repeat;
     background-position: 94% center;
     cursor: pointer;
@@ -513,7 +520,55 @@ textarea::placeholder {
     overflow-wrap: break-word;
 
 }
-
+.thankyou-card{
+    /* width: 500px;
+    height: 300px;
+    border: 1px solid white; */
+    border-radius: 24px;
+    /* box-shadow: 0 0.125rem 0.5rem rgba(0, 0, 0, 0.1); */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    /* display: flex; */
+    flex-direction: column;
+    gap: 26px;
+    padding: 20px;
+    justify-content: center;
+    align-items: center;
+}
+.thankyou-content{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    justify-content: center;
+    align-items: center;
+}
+.thankyou-heading-container h2{
+    font-size: 36px;
+    color: white;
+    line-height: 26.8px;
+    font-weight: 700;
+}
+.thankyou-message-container p{
+    font-size: 22px;
+    color: white;
+    line-height: 21.2px;
+    font-weight: 500;
+}
+.thankyou-redirect-btn-container a{
+    border: 1px solid black;
+    background-color: #C725D6;
+    color: white;
+    padding: 20px 40px;
+    border-radius: 12px;
+    font-size: 18px;
+    font-weight: 600;
+}
 /*5th form*/
 
 .ffth-form {
@@ -576,7 +631,7 @@ textarea::placeholder {
 .artx-ffth-form {
     max-width: 600px;
     height: 350px;
-    /*background-image: url('http://localhost/artxhub/wp-content/themes/socialv-child/images/artx-bg-connect-op.svg');*/
+    /*background-image: url('https://artxhub.com/wp-content/themes/socialv-child/images/artx-bg-connect-op.svg');*/
     position: relative;
     top: 75px;
     left: 125px;
@@ -630,7 +685,6 @@ textarea::placeholder {
 
 
 
-ƒ
 /*================2nd form ==========================*/
 
 
@@ -1341,11 +1395,6 @@ textarea::placeholder {
 
     }
 
-    .artx-FIFTH-form svg {
-        width: 340px;
-
-    }
-
     .artx-FIFTH-form .artx-form-common {
         width: 278px;
 
@@ -1669,7 +1718,9 @@ select#rtSelectPrivacy:nth-child(3) {
     border-radius: 20px;
     border: 1px solid rgba(199, 37, 214, 1);
 }
-
+.user-information-carousel{
+    height: 50px;
+}
 
 .user-information-carousel-bottom {
     position: absolute;
@@ -1680,6 +1731,9 @@ select#rtSelectPrivacy:nth-child(3) {
     background: #2B2232;
     border-radius: 20px;
     border: 1px solid rgba(199, 37, 214, 1);
+}
+.user-information-carousel-bottom{
+    height: 50px;
 }
 
 .common-carousel-block {
@@ -1748,23 +1802,41 @@ select#rtSelectPrivacy:nth-child(3) {
 
 .additional-block-content {
     position: absolute;
-    width: 240px;
-    top: 30px;
-    left: 17%;
-
+    width: 500px;
+    top: -90px;
+    left: 230px;
     font-family: 'Bebas Neue';
-    font-size: 14px;
-    font-weight: 400;
+    font-size: 18px;
+    font-weight: 600;
     line-height: 22.4px;
     text-align: center;
     color: #fff;
-    height: 160px;
+    height: 348px;
     overflow-y: scroll;
+    background: #0f0f0f70;
+    padding: 10px;
+    border-radius: 20px;
 
+}
+.second-additional-block .additional-block-content{
+    top: -110px;
+    left: 230px;
+    height: 428px;
+}
+.third-additional-block .additional-block-content{
+    top: -80px;
+    left: 230px;
+    height: 348px;
+}
+.additional-container-step4  .additional-block-content{
+    top: -60px;
+}
+.additional-container-step5 .additional-block-content{
+    top: -80px;
+    height: 441px;
 }
 
 .second-additional-block {
-
     top: 29%;
     left: 97%;
 }
@@ -1933,6 +2005,318 @@ select#rtSelectPrivacy:nth-child(3) {
     color: white;
 }
 
+.THIRD-form .user-information-carousel-bottom {
+    position: absolute;
+    bottom: 0px;
+}
+
+.user-information-carousel-bottom-step5 {
+    position: absolute;
+    bottom: 0px;
+}
+
+@media(min-width: 1920px) {
+    .ArtX-heading h2 {
+        font-size: 100px;
+    }
+
+    .ArtX-heading p {
+        font-size: 40px;
+    }
+
+    .artx-ffth-form-svg {
+        width: 800px;
+        height: 550px;
+    }
+
+    .artx-ffth-form {
+        top: 0;
+        left: 160px;
+        max-width: 800px;
+    }
+
+    .artx-form-common {
+        width: 600px;
+        top: 80%;
+        /* left: ; */
+    }
+
+    #invitation-heading svg {
+        width: 50px;
+        height: 50px;
+        margin-bottom: 25px;
+    }
+
+    .form-common input::placeholder {
+        font-family: 'Helvetica';
+        font-weight: 700;
+        font-size: 24px;
+        color: #ffffff !important;
+    }
+
+    #user_email {
+        font-size: 24px !important;
+        width: 600px !important;
+        padding: 40px 20px !important;
+    }
+
+    .artx-form-common h4 {
+        font-size: 50px;
+    }
+
+    .artx-ffth-form .additional-container .additional-block-content {
+        width: 500px;
+        top: -50px;
+        left: 300px;
+        font-size: 24px;
+        color: #fff;
+        height: 464px;
+    }
+
+    .artx-ffth-form .additional-container .additional-block-content h4 {
+        font-weight: 700;
+        text-shadow: 22px 2px 35px rgba(0, 0, 0, 2);
+    }
+
+    .artx-ffth-form .artx-form-common .form-button {
+        max-height: unset;
+        height: unset;
+        padding: 20px 0px 18px 0px;
+        max-width: 250px;
+    }
+
+    .form-common input::placeholder {
+        font-weight: 700;
+        font-size: 24px;
+    }
+
+    #tooltip-block-heading {
+        top: 17%;
+        left: 56%;
+    }
+
+    .SECOND-form .user-details {
+        position: absolute !important;
+        bottom: 0px !important;
+        margin-top: unset !important;
+    }
+
+    .second-form-svg {
+        width: 920px;
+        height: 650px;
+    }
+
+    .artx-SECOND-form {
+        left: 140px;
+        HEIGHT: 530PX;
+        top: -50px;
+    }
+
+    .second-additional-block .additional-block-content {
+        width: 500px;
+        top: -40px;
+        left: 300px;
+        font-size: 24px;
+        color: #fff;
+        height: 445px;
+    }
+
+    .artx-SECOND-form .second-additional-block .additional-block-content {
+        width: 500px;
+        top: -100px;
+        left: 300px;
+        font-size: 24px;
+        color: #fff;
+        height: 505px;
+    }
+    .second-additional-block .additional-block-content h4 {
+        font-weight: 700;
+        text-shadow: 22px 2px 35px rgba(0, 0, 0, 2);
+    }
+
+    .artx-SECOND-form .artx-form-common {
+        width: 438px;
+        top: 60%;
+        left: 53%;
+    }
+
+    .scnd-frm .form-column-container .form-column .form-row input {
+        width: 285px;
+        font-size: 24px !important;
+    }
+
+    #submit_details-btn {
+        font-size: 35px;
+        font-weight: 400;
+        padding: 20px 47px;
+        max-width: 250px;
+        max-height: unset;
+        margin-left: 100px;
+    }
+
+    #user-information-heading svg {
+        width: 50px;
+        height: 50px;
+        margin-bottom: 20px;
+    }
+
+    #tooltip-user-heading {
+        top: 6%;
+        left: 72%;
+    }
+
+    .artx-THIRD-form {
+        left: 85px;
+        TOP: -40PX;
+    }
+
+    .third-form-svg {
+        width: 920px;
+        height: 671px;
+    }
+
+    .artx-THIRD-form .artx-form-common {
+        top: 70%;
+        width: 510px;
+        left: 64%;
+    }
+
+    .artx-THIRD-form .artx-form-common h4 {
+        font-size: 34px;
+    }
+
+    .form-row3 label {
+        font-size: 26px;
+        line-height: 40px;
+    }
+
+    .form-row3 {
+        margin-bottom: 20px;
+    }
+
+    .form-row3 label::after {
+        top: 4px;
+    }
+
+    .form-row3 label::before {
+        width: 25px;
+        height: 25px;
+        margin: 0px;
+        top: 10px;
+    }
+
+    #add_to_group_btn {
+        max-height: unset;
+        padding: 20px 47px;
+        font-size: 35px;
+        max-width: 250px;
+    }
+
+    #join-group-heading svg {
+        margin-bottom: 10px;
+        width: 50px;
+        height: 50px;
+    }
+
+    #tooltip-group-heading .tooltip-svg svg {
+        width: 210px;
+        height: 210px;
+    }
+
+    #tooltip-group-heading {
+        top: -80px;
+        left: 30px;
+    }
+    .profile-svg2 svg,
+    .profile-svg1 svg{
+        width: 400px;
+    height: 238px;
+    }
+    .file-upload-wrapper{
+        top: 27%;
+        left: 100px;
+    }
+    .artx-FOURTH-form{
+        top: -10px;
+    }
+    .textarea-contnt{
+        left: 215px;
+        TOP: 10PX;
+    }
+    .FOURTH-form .user-detail{
+        bottom: 0;
+    }
+    .additional-container-step4 .additional-block-content{
+        width: 500px;
+        font-size: 24px;
+        top: -40px;
+        left: 350px;
+        font-weight: 700;
+        height: 348px;
+    }
+    .additional-container-step4 .additional-block-content h4 {
+        font-weight: 700;
+        text-shadow: 22px 2px 35px rgba(0, 0, 0, 2);
+    }
+    .file-upload-wrapper .upload-image2,
+    .file-upload-wrapper .upload-image1{
+        width: 46px;
+        height: 46px;
+    }
+    #profileDescription{
+        font-size: 18px;
+    }
+    .fifth-form-svg{
+        width: 800px;
+        height: 544px;
+    }
+    .artx-FIFTH-form{
+        top: 7px;
+        left: 165px;
+    }
+    .additional-container-step5 .additional-block-content{
+        width: 500px;
+        height: 500px;
+        font-size: 24px;
+        font-weight: 700px;
+        top: -80px;
+        left: 410px;
+    }
+    .additional-container-step5 .additional-block-content h4 {
+        font-weight: 700;
+        text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.7);
+    }
+    #create-story-form{
+        top: 59%;
+        left: 68%;
+    }
+    .artx-FIFTH-form .artx-form-common h4{
+        font-size: 36px;
+    }
+    #submit_details-btn_LAST{
+        padding: 10px 47px;
+        font-size: 35px;
+        max-width: 250px;
+        max-height: unset;
+    }
+    #storytitle{
+        padding: 10px 15px !important;
+        width: 600px !important;
+        font-size: 16px !important;
+        height: unset !important;
+    }
+    #file-upload-label{
+        padding: 10px 47px;
+        font-size: 35px;
+        max-width: 250px;
+        max-height: unset;
+    }
+    /* .file-upload-wrapper svg{
+        width: 400px;
+        height: 238px;
+    } */
+}
+
 @media(max-width:767px) {
     .credit-points {
         position: relative;
@@ -1997,7 +2381,7 @@ select#rtSelectPrivacy:nth-child(3) {
     }
 
     .SECOND-form {
-        height: 111vh
+        height: 106vh;
     }
 
     .second-form-svg {
@@ -2025,7 +2409,7 @@ select#rtSelectPrivacy:nth-child(3) {
     }
 
     .SECOND-form .user-information-carousel-bottom {
-        bottom: -40px
+        bottom: 0;
     }
 
     #tooltip-user-heading {
@@ -2043,11 +2427,12 @@ select#rtSelectPrivacy:nth-child(3) {
     }
 
     .form-column3 {
-        max-width: 70vw;
+        max-width: 90vw;
+        gap: 0px;
     }
 
     .form-row3 {
-        flex: 0 0 35%;
+        flex: 0 0 47%;
     }
 
     #add_to_group_btn {
@@ -2057,7 +2442,7 @@ select#rtSelectPrivacy:nth-child(3) {
     }
 
     .artx-THIRD-form .artx-form-common {
-        left: 90%;
+        left: 85%;
     }
 
     .third-additional-block .additional-block-content {
@@ -2070,11 +2455,12 @@ select#rtSelectPrivacy:nth-child(3) {
     }
 
     .TR-form {
-        height: 103vh;
+        height: 100vh;
     }
 
     .TR-form .user-information-carousel-bottom {
-        bottom: -50px;
+        bottom: 0;
+        left: -20px;
     }
 
     #tooltip-group-heading .tooltip-svg {
@@ -2091,21 +2477,88 @@ select#rtSelectPrivacy:nth-child(3) {
         font-size: 14px;
         line-height: 18.48px;
     }
-    .cntn-txtblock h6{
+
+    .cntn-txtblock h6 {
         font-size: 16px;
     }
-    .additional-container-step4{
+
+    .additional-container-step4 {
         top: 525px;
-    left: 280px;
-    }
-    .FOURTH-form{
-        height: 130vh;
+        left: 280px;
     }
 
-    .additional-container-step4 .additional-block-content{
-        left: 0px;
+    .FOURTH-form {
+        height: 130vh;
     }
-    .FOURTH-form .user-information-carousel-bottom{
+    .additional-block-content{
+        padding: unset;
+    }
+    .additional-container-step4 .additional-block-content {
+        left: 0px;
+        top: 20px;
+    }
+
+    .FOURTH-form .user-information-carousel-bottom {
         bottom: -230px;
+    }
+
+    .fifth-form-svg {
+        width: 340px;
+    }
+
+    #storycontent,
+    #storytitle {
+        width: 280px !important;
+    }
+
+    #storycontent {
+        padding: 2px 12px;
+        margin-bottom: 0px;
+    }
+
+    #storytitle {
+        padding: 0px 12px;
+    }
+
+    .artx-FIFTH-form {
+        left: -30px;
+    }
+
+    #create-story-form {
+        left: 60%;
+    }
+
+    .additional-container-step5 .additional-block-content {
+        top: 344px;
+        left: -270px;
+    }
+
+    .user-information-carousel-bottom-step5 {
+        position: relative;
+        bottom: -30px;
+    }
+
+    .profile-group-heading .tooltip-svg {
+        left: -170px;
+    }
+    .additional-block-content{
+        width: 250px;
+        height: 148px;
+        font-size: 14px;
+        background: none;
+        padding: unset;
+    }
+    .second-additional-block .additional-block-content{
+        height: 140px;
+    }
+    .third-additional-block .additional-block-content{
+        height: 140px;
+    }
+    .form-row3{
+        margin-bottom: 6px;
+    }
+    .form-row3 label{
+        font-size: 14px;
+        line-height: 18px;
     }
 }

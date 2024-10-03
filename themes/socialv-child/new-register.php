@@ -15,7 +15,7 @@ Template Name: Custom Registration
 </div>
 
 <!--first form-->
-<div class="fifth-form f-form" id="code-validation-container" style="display: none">
+<div class="fifth-form f-form" id="code-validation-container">
     <div class="ArtX-heading">
         <?php
                                         // Ensure this code runs within a WordPress environment
@@ -25,6 +25,8 @@ Template Name: Custom Registration
                                         
                                         // Fetch recent users
                                         $recent_users = fetch_recent_users();
+
+                                        // print_r($recent_users);
                                         ?>
 
         <!-- Carousel Container -->
@@ -1294,7 +1296,7 @@ Template Name: Custom Registration
                 // Fetch the 20 most recent users
                 $recent_users = $wpdb->get_results("
                     SELECT ID, display_name 
-                    FROM wpsr_users 
+                    FROM {$wpdb->users} 
                     ORDER BY user_registered DESC 
                     LIMIT 20
                 ");
@@ -1588,7 +1590,8 @@ Template Name: Custom Registration
 
 
     <div class=" artx-THIRD-form">
-        <svg class = "third-form-svg" width="720" height="471" viewBox="0 0 720 471" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <svg class="third-form-svg" width="720" height="471" viewBox="0 0 720 471" fill="none"
+            xmlns="http://www.w3.org/2000/svg">
             <g filter="url(#filter0_bd_90_613)">
                 <path
                     d="M622.986 202.169C615.37 187.057 614.865 169.759 614.382 153.029L614.302 150.375C613.784 133.218 612.478 115.285 602.918 101.169C594.69 89.0198 579.298 80.9569 564.168 79.5771C556.879 65.1442 541.553 54.7669 525.426 50.9492C505.469 46.2235 484.507 49.7634 464.602 54.7184C444.698 59.6733 424.931 66.0699 404.443 67.0882C383.954 68.111 362.017 62.9135 347.998 48C333.979 62.9135 312.042 68.1065 291.553 67.0882C271.064 66.0655 251.297 59.6733 231.393 54.7184C211.489 49.7634 190.531 46.2235 170.569 50.9492C154.442 54.7669 139.117 65.1442 131.828 79.5771C116.697 80.9569 101.31 89.0198 93.0823 101.169C83.522 115.285 82.2158 133.218 81.6977 150.375L81.6179 153.029C81.1309 169.759 80.6305 187.057 73.0142 202.169C66.9787 214.133 59.9691 220.477 48 223.25C59.9691 226.023 66.9832 232.366 73.0142 244.331C80.6305 259.443 81.1353 276.741 81.6179 293.471L81.6977 296.125C82.2158 313.282 83.522 331.215 93.0823 345.331C101.31 357.48 116.702 365.543 131.828 366.923C139.117 381.356 154.442 391.733 170.569 395.551C190.527 400.277 211.489 396.737 231.393 391.782C251.297 386.827 271.064 380.43 291.553 379.412C312.042 378.393 333.979 383.586 347.998 398.5C362.013 383.586 383.949 378.393 404.443 379.412C424.936 380.43 444.698 386.827 464.602 391.782C484.507 396.737 505.469 400.272 525.426 395.551C541.553 391.733 556.879 381.356 564.168 366.923C579.298 365.543 594.686 357.48 602.918 345.331C612.478 331.215 613.784 313.282 614.302 296.125L614.382 293.471C614.865 276.741 615.37 259.443 622.986 244.331C629.017 232.366 636.035 226.023 648 223.25C636.035 220.477 629.017 214.133 622.986 202.169Z"
@@ -1696,8 +1699,7 @@ Template Name: Custom Registration
             </div>
             <!---->
 
-            <input type="hidden" id="crnt_usr_id" name="crnt_usr_id"
-                value="<?php echo esc_attr(get_current_user_id()); ?>">
+            <input type="hidden" id="crnt_usr_id" name="crnt_usr_id">
             <div class="form-column-container">
                 <?php
                     global $wpdb;
@@ -1706,36 +1708,15 @@ Template Name: Custom Registration
                 ?>
                 <div class="form-column3">
                     <?php
-                        // if($results){
-                        //     foreach($results as $group){
-                        //         echo '<div class="form-row3">';
-                        //         echo '<input type="checkbox" id="group_'.$group['id'].'" name="groups[]" value="'.$group['id'].'">';
-                        //         echo '<label for="group_'.$group['id'].'">'.$group['name'].'</label>';
-                        //         echo '</div>';
-                        //     }
-                        // }
+                        if($results){
+                            foreach($results as $group){
+                                echo '<div class="form-row3">';
+                                echo '<input type="checkbox" id="group_'.$group['id'].'" name="groups[]" value="'.$group['id'].'">';
+                                echo '<label for="group_'.$group['id'].'">'.$group['name'].'</label>';
+                                echo '</div>';
+                            }
+                        }
                     ?>
-                    <div class="form-row3">
-                        <input type="checkbox" id="group_1" name="groups[]" value="1">
-                        <label for="group_1">Group 1</label>
-                    </div>
-                    <div class="form-row3">
-                        <input type="checkbox" id="group_2" name="groups[]" value="2">
-                        <label for="group_2">Group 2</label>
-                    </div>
-                    <div class="form-row3">
-                        <input type="checkbox" id="group_3" name="groups[]" value="3">
-                        <label for="group_3">Group 3</label>
-                    </div>
-                    <div class="form-row3">
-                        <input type="checkbox" id="group_3" name="groups[]" value="3">
-                        <label for="group_3">Group 4</label>
-                    </div>
-                    <div class="form-row3">
-                        <input type="checkbox" id="group_3" name="groups[]" value="3">
-                        <label for="group_3">Group 5</label>
-                    </div>
-
                 </div>
             </div>
             <button type="submit" class="form-button" id="add_to_group_btn">SUBMIT</button>
@@ -2554,7 +2535,7 @@ $users_with_profile_pictures = fetch_recent_users_with_profile();
 
 <!--fifth form-->
 
-<div class="Fifth-final-form FL-form" id="featured-story-container"  style="display: block">
+<div class="Fifth-final-form FL-form" id="featured-story-container">
     <div class="ArtX-heading">
 
         <?php
@@ -2876,7 +2857,8 @@ $users_with_profile_pictures = fetch_recent_users_with_profile();
 
     <div class=" artx-FIFTH-form">
         <div classs="ff-svg">
-            <svg width="600" height="444" viewBox="0 0 600 444" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <svg class="fifth-form-svg" width="600" height="444" viewBox="0 0 600 444" fill="none"
+                xmlns="http://www.w3.org/2000/svg">
                 <path
                     d="M574.986 195.468C567.37 176.339 566.865 154.441 566.382 133.263L566.302 129.904C565.784 108.185 564.478 85.4832 554.918 67.6146C546.69 52.2348 531.298 42.0282 516.168 40.2815C508.879 22.0111 493.553 8.87464 477.426 4.04196C457.469 -1.9403 436.507 2.54079 416.602 8.81323C396.698 15.0857 376.931 23.1829 356.443 24.472C335.954 25.7667 314.017 19.1873 299.998 0.308594C285.979 19.1873 264.042 25.7611 243.553 24.472C223.064 23.1773 203.297 15.0857 183.393 8.81323C163.489 2.54079 142.531 -1.9403 122.569 4.04196C106.442 8.87464 91.1165 22.0111 83.8279 40.2815C68.6972 42.0282 53.3096 52.2348 45.0823 67.6146C35.522 85.4832 34.2158 108.185 33.6977 129.904L33.6179 133.263C33.1309 154.441 32.6305 176.339 25.0142 195.468C18.9787 210.614 11.9691 218.644 0 222.154C11.9691 225.664 18.9832 233.695 25.0142 248.84C32.6305 267.97 33.1353 289.868 33.6179 311.045L33.6977 314.405C34.2158 336.124 35.522 358.825 45.0823 376.694C53.3096 392.074 68.7016 402.28 83.8279 404.027C91.1165 422.298 106.442 435.434 122.569 440.267C142.527 446.249 163.489 441.768 183.393 435.495C203.297 429.223 223.064 421.126 243.553 419.836C264.042 418.547 285.979 425.121 299.998 444C314.013 425.121 335.949 418.547 356.443 419.836C376.936 421.126 396.698 429.223 416.602 435.495C436.507 441.768 457.469 446.243 477.426 440.267C493.553 435.434 508.879 422.298 516.168 404.027C531.298 402.28 546.686 392.074 554.918 376.694C564.478 358.825 565.784 336.124 566.302 314.405L566.382 311.045C566.865 289.868 567.37 267.97 574.986 248.84C581.017 233.695 588.035 225.664 600 222.154C588.035 218.644 581.017 210.614 574.986 195.468Z"
                     fill="#2B2232" fill-opacity="0.9" />
@@ -3044,6 +3026,63 @@ $users_with_profile_pictures = fetch_recent_users_with_profile();
 </div>
 
 
+
+<!-- Thankyou page -->
+
+<div class="thankyou-page-container" id='thankyou-page-container'>
+    <div class="thankyou-card">
+        <svg width="720" height="471" viewBox="0 0 720 471" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <g filter="url(#filter0_bd_90_613)">
+                <path
+                    d="M622.986 202.169C615.37 187.057 614.865 169.759 614.382 153.029L614.302 150.375C613.784 133.218 612.478 115.285 602.918 101.169C594.69 89.0198 579.298 80.9569 564.168 79.5771C556.879 65.1442 541.553 54.7669 525.426 50.9492C505.469 46.2235 484.507 49.7634 464.602 54.7184C444.698 59.6733 424.931 66.0699 404.443 67.0882C383.954 68.111 362.017 62.9135 347.998 48C333.979 62.9135 312.042 68.1065 291.553 67.0882C271.064 66.0655 251.297 59.6733 231.393 54.7184C211.489 49.7634 190.531 46.2235 170.569 50.9492C154.442 54.7669 139.117 65.1442 131.828 79.5771C116.697 80.9569 101.31 89.0198 93.0823 101.169C83.522 115.285 82.2158 133.218 81.6977 150.375L81.6179 153.029C81.1309 169.759 80.6305 187.057 73.0142 202.169C66.9787 214.133 59.9691 220.477 48 223.25C59.9691 226.023 66.9832 232.366 73.0142 244.331C80.6305 259.443 81.1353 276.741 81.6179 293.471L81.6977 296.125C82.2158 313.282 83.522 331.215 93.0823 345.331C101.31 357.48 116.702 365.543 131.828 366.923C139.117 381.356 154.442 391.733 170.569 395.551C190.527 400.277 211.489 396.737 231.393 391.782C251.297 386.827 271.064 380.43 291.553 379.412C312.042 378.393 333.979 383.586 347.998 398.5C362.013 383.586 383.949 378.393 404.443 379.412C424.936 380.43 444.698 386.827 464.602 391.782C484.507 396.737 505.469 400.272 525.426 395.551C541.553 391.733 556.879 381.356 564.168 366.923C579.298 365.543 594.686 357.48 602.918 345.331C612.478 331.215 613.784 313.282 614.302 296.125L614.382 293.471C614.865 276.741 615.37 259.443 622.986 244.331C629.017 232.366 636.035 226.023 648 223.25C636.035 220.477 629.017 214.133 622.986 202.169Z"
+                    fill="#2B2232" fill-opacity="0.9" shape-rendering="crispEdges" />
+                <path
+                    d="M563.632 79.8476L563.782 80.1445L564.113 80.1747C579.094 81.5408 594.31 89.5279 602.421 101.506L602.918 101.169L602.421 101.506C611.871 115.459 613.184 133.223 613.703 150.393L613.782 153.047L613.783 153.074C614.265 169.769 614.768 187.196 622.45 202.439L622.986 202.169L622.45 202.439C625.488 208.465 628.794 213.116 632.878 216.612C636.443 219.665 640.579 221.818 645.597 223.25C640.579 224.682 636.443 226.835 632.878 229.888C628.794 233.384 625.488 238.035 622.45 244.061L622.986 244.331L622.45 244.061C614.768 259.304 614.265 276.731 613.783 293.426L613.782 293.453L613.703 296.107C613.184 313.277 611.871 331.041 602.421 344.994C594.305 356.972 579.094 364.959 564.113 366.325L563.782 366.356L563.632 366.652C556.439 380.895 541.281 391.181 525.288 394.967C505.479 399.653 484.636 396.151 464.747 391.199C460.592 390.165 456.435 389.065 452.273 387.964C436.553 383.805 420.736 379.621 404.472 378.812C384.093 377.8 362.194 382.893 347.998 397.63C333.797 382.893 311.898 377.8 291.523 378.812C275.262 379.621 259.442 383.806 243.72 387.965C239.558 389.066 235.403 390.165 231.248 391.199C211.359 396.151 190.516 399.658 170.707 394.967C154.714 391.181 139.556 380.895 132.364 366.652L132.214 366.356L131.882 366.325C116.906 364.959 101.69 356.972 93.5791 344.994C84.1286 331.041 82.8159 313.277 82.2974 296.107L82.2177 293.453L82.2177 293.453L82.2169 293.426C81.7352 276.731 81.2325 259.304 73.55 244.061L73.0142 244.331L73.55 244.061C70.5125 238.035 67.2076 233.384 63.1241 229.888C59.5587 226.835 55.4236 224.682 50.4034 223.25C55.4234 221.818 59.5576 219.665 63.1225 216.612C67.2053 213.116 70.5103 208.465 73.5499 202.439L73.55 202.439C81.2229 187.215 81.7296 169.812 82.2151 153.136L82.2177 153.047L82.2177 153.047L82.2974 150.394C82.8159 133.223 84.1286 115.459 93.579 101.506L93.5791 101.506C101.69 89.5279 116.902 81.5408 131.882 80.1747L132.214 80.1445L132.364 79.8476C139.556 65.6047 154.714 55.3191 170.707 51.5331C190.521 46.8425 211.359 50.3493 231.248 55.3006C235.398 56.3337 239.549 57.4314 243.706 58.5309C259.433 62.6903 275.257 66.8755 291.523 67.6875L291.523 67.6875C311.898 68.7001 333.798 63.6068 347.998 48.8703C362.198 63.6069 384.097 68.7045 404.472 67.6875C420.733 66.8793 436.554 62.6941 452.276 58.535C456.438 57.434 460.593 56.3348 464.747 55.3006C484.637 50.3493 505.479 46.8425 525.288 51.5331C541.281 55.3191 556.439 65.6047 563.632 79.8476Z"
+                    stroke="url(#paint0_linear_90_613)" stroke-opacity="0.5" stroke-width="1.2"
+                    shape-rendering="crispEdges" />
+            </g>
+            <defs>
+                <filter id="filter0_bd_90_613" x="-72" y="-72" width="840" height="590.5" filterUnits="userSpaceOnUse"
+                    color-interpolation-filters="sRGB">
+                    <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                    <feGaussianBlur in="BackgroundImageFix" stdDeviation="60" />
+                    <feComposite in2="SourceAlpha" operator="in" result="effect1_backgroundBlur_90_613" />
+                    <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+                        result="hardAlpha" />
+                    <feOffset dx="12" dy="12" />
+                    <feGaussianBlur stdDeviation="30" />
+                    <feComposite in2="hardAlpha" operator="out" />
+                    <feColorMatrix type="matrix"
+                        values="0 0 0 0 0.620145 0 0 0 0 0.249359 0 0 0 0 0.565884 0 0 0 0.25 0" />
+                    <feBlend mode="normal" in2="effect1_backgroundBlur_90_613" result="effect2_dropShadow_90_613" />
+                    <feBlend mode="normal" in="SourceGraphic" in2="effect2_dropShadow_90_613" result="shape" />
+                </filter>
+                <linearGradient id="paint0_linear_90_613" x1="348" y1="48" x2="348" y2="398.5"
+                    gradientUnits="userSpaceOnUse">
+                    <stop offset="0.05" stop-color="#D57490" />
+                    <stop offset="0.535" stop-color="#C725D6" />
+                </linearGradient>
+            </defs>
+        </svg>
+        <div class="thankyou-content">
+            <div class="thankyou-heading-container">
+                <h2>
+                    Thankyou
+                </h2>
+            </div>
+            <div class="thankyou-message-container">
+                <p>
+                    Welcome to ArtXhub.
+                </p>
+            </div>
+            <div class="thankyou-redirect-btn-container">
+                <a href="<?php echo site_url();?>">
+                    Go To Home
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
 
 
 <?php get_footer(); ?>

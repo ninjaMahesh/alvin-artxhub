@@ -14,9 +14,7 @@ add_action( 'after_setup_theme', 'socialv_child_theme_setup' );
 
 
 
-
 //  carousel enquque
- 
 function enqueue_slick_carousel_assets() {
     // Enqueue Slick Carousel CSS
     wp_enqueue_style( 'slick-carousel-css', 'https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css' );
@@ -33,21 +31,19 @@ add_action( 'wp_enqueue_scripts', 'enqueue_slick_carousel_assets' );
 // carousel end========
  
 // Ensure this code is within your theme's functions.php
-
 function fetch_recent_users() {
     global $wpdb;  
 
     // Query to fetch 20 most recently joined users
     $recent_users = $wpdb->get_results( "
         SELECT display_name
-        FROM wpsr_users
+        FROM {$wpdb->users}
         ORDER BY user_registered DESC
         LIMIT 20
     " );
 
     return $recent_users;
 }
- 
 
 
 /**
@@ -55,14 +51,6 @@ function fetch_recent_users() {
  *
  */
  
-if ( ! function_exists( 'ghostpool_child_theme_language' ) ) {
-	function ghostpool_child_theme_language() {
-		$language_directory = get_stylesheet_directory() . '/languages';
-		load_child_theme_textdomain( 'network', $language_directory );
-	}
-}
-add_action( 'after_setup_theme', 'ghostpool_child_theme_language' );
-
 function custom_scripts_calls() {
     // Enqueue jQuery from CDN
     wp_enqueue_script('jquery', 'https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js', array(), '3.7.1', true);
@@ -80,12 +68,6 @@ function custom_scripts_calls() {
 
 }
 add_action('wp_enqueue_scripts', 'custom_scripts_calls');
-
-function artx_form_style() {
-    wp_enqueue_style( 'artx_form_ghostpool-child-style', get_stylesheet_directory_uri() . '/artx-form-style.css', array(), null, true );
-}
-add_action( 'wp_enqueue_scripts', 'artx_form_style' );
-
 
 
 function localize_video_tracking_script() {
@@ -122,11 +104,6 @@ function validate_invitation_code() {
     // Retrieve the current status of the invitation code feature
     $invitation_code_enabled = get_option('invitation_code_enabled') === 'enable';
     
-        // Debug: Print values to ensure correct inputs
-    error_log('Invitation Code Enabled: ' . ($invitation_code_enabled ? 'Yes' : 'No'));
-    error_log('Received Email Address: ' . $email_address);
-    error_log('Received Invitation Code: ' . $invitation_code);
-
     // If invitation code is enabled, retrieve valid codes dynamically
     $valid_codes = $invitation_code_enabled ? get_valid_codes() : [];
 
@@ -135,13 +112,9 @@ function validate_invitation_code() {
         return $obj->code;
     }, $valid_codes);
     
-        // Debug: Print the valid codes array
-    error_log('Valid Codes: ' . print_r($valid_codes_array, true));
-
-
+   
     // Check if the invitation code is in the array of valid codes (only if enabled)
     $is_valid_code = $invitation_code_enabled ? in_array($invitation_code, $valid_codes_array) : true;
-    error_log($is_valid_code);
     // Debug: Print the status of the validity check
     // error_log('Is Valid Code: ' . ($is_valid_code ? 'Yes' : 'No'));
 
@@ -289,100 +262,80 @@ function register_new_artist() {
     
     // Update additional user meta (phone number)
     update_user_meta($user_id, 'n360_phone_number', $phone_number);
-    
+    // $usermeta;
+    // bp_core_signup_user($user_name, $password, $email_address, $usermeta);
+    // Log the user in
     wp_set_current_user($user_id);
     wp_set_auth_cookie($user_id);
     do_action('wp_login', $user_name, get_userdata($user_id));
     
-    // Return success message
-    wp_send_json_success(array('message' => "User created successfully and logged in"));
+    // At this point, BuddyPress will recognize the logged-in user
+    $bp_user_id = bp_loggedin_user_id(); // Should return the same $user_id
+    
+    // Return success message with user ID
+    wp_send_json_success(array(
+        'message' => "User created successfully and logged in",
+        'user_id' => $user_id,
+    ));
+    wp_die();
 }
 
 
 
 
-add_action('wp_ajax_join_buddypress_group', 'join_buddypress_groups');
+add_action('wp_ajax_join_buddypress_groups', 'join_buddypress_groups');
 add_action('wp_ajax_nopriv_join_buddypress_groups', 'join_buddypress_groups');
 function join_buddypress_groups(){
     global $wpdb;
+    $table_prefix = $wpdb->prefix;
+    $table_name = $table_prefix . 'bp_groups_members';
     session_start();
-    
+
     // Array of group IDs passed via POST
-    // $group_ids = isset($_POST['group_ids']) ? array_map('intval', $_POST['group_ids']) : array();
-    // $user_id = get_current_user_id();
-
-    // $message = print_r($group_ids, true);
-    // error_log($user_id);
-    // error_log($message);
-    // // Validate input
-    // if(empty($group_ids) || !$user_id){
-    //     wp_send_json_error(array('message' => 'Invalid group or user ID.'));
-    // }
-
-    // $joined_groups = array();
-    // $failed_groups = array();
-    // $already_member_groups = array();
-
-    // // Loop through each group ID and attempt to join
-    // foreach ($group_ids as $group_id) {
-    //     if (groups_is_user_member($user_id, $group_id)) {
-    //         $already_member_groups[] = $group_id;
-    //     } elseif (groups_join_group($group_id, $user_id)) {
-    //         $joined_groups[] = $group_id;
-    //     } else {
-    //         $failed_groups[] = $group_id;
-    //     }
-    // }
-
-
-
-// Array of group IDs passed via POST
-$group_ids = isset($_POST['group_ids']) ? array_map('intval', $_POST['group_ids']) : array();
-$user_id = get_current_user_id();
-
-$message = print_r($group_ids, true);
-error_log($user_id);
-error_log($message);
-
-// Validate input
-if (empty($group_ids) || !$user_id) {
-    wp_send_json_error(array('message' => 'Invalid group or user ID.'));
-}
-
-$joined_groups = array();
-$failed_groups = array();
-$already_member_groups = array();
-
-// Loop through each group ID and attempt to join
-foreach ($group_ids as $group_id) {
-    if (groups_is_user_member($user_id, $group_id)) {
-        $already_member_groups[] = $group_id;
-    } elseif (groups_join_group($group_id, $user_id)) {
-        $joined_groups[] = $group_id;
-
-        // Fetch group name after joining
-        $group = groups_get_group(array('group_id' => $group_id));
-        if ($group && !empty($group->name)) {
-            // Store the group name in user meta
-            add_user_meta($user_id, 'joined_group_names', $group->name);
-        }
-    } else {
-        $failed_groups[] = $group_id;
+    $group_ids = isset($_POST['group_ids']) ? array_map('intval', $_POST['group_ids']) : array();
+    $user_id = $_POST['user_id'];
+    
+    // Debugging output
+    error_log('User ID: ' . $user_id);
+    error_log('Group IDs: ' . print_r($group_ids, true));
+    
+    // Validate input
+    if (empty($group_ids) || !$user_id) {
+        wp_send_json_error(array('message' => 'Invalid group or user ID.'));
+        return; // Stop further processing
     }
-}
-
-// Provide a JSON response back
-wp_send_json_success(array(
-    'joined_groups' => $joined_groups,
-    'already_member_groups' => $already_member_groups,
-    'failed_groups' => $failed_groups
-));
-
-
-
-
-
-    // Prepare response message
+    // print_r(wp_get_current_user());
+    
+    $joined_groups = array();
+    $failed_groups = array();
+    $already_member_groups = array();
+    
+    // Loop through each group ID and attempt to join
+    foreach ($group_ids as $group_id) {
+        if (!is_int($group_id) || $group_id <= 0) {
+            $failed_groups[] = $group_id;
+            continue;
+        }
+        
+        // Prepare the data for insertion
+        $data = array(
+            'user_id' => $user_id,
+            'group_id' => $group_id,
+            'date_modified' => current_time('mysql') // Get the current time in MySQL format
+        );
+        
+        // Insert the data into the wph6_bp_groups_members table
+        $response = $wpdb->insert($table_name, $data);
+        if(!$response){
+            wp_send_json_error('Error occurred while performing the operation');
+            wp_die();
+        }
+        $group = groups_get_group(array('group_id' => $group_id));
+        add_user_meta($user_id, 'joined_group_names', $group->name);
+        
+    }
+    
+    // Generate message based on the results
     $message = '';
     if (!empty($joined_groups)) {
         $message .= 'Successfully joined groups: ' . implode(', ', $joined_groups) . '. ';
@@ -394,16 +347,17 @@ wp_send_json_success(array(
         $message .= 'Failed to join groups: ' . implode(', ', $failed_groups) . '. ';
     }
 
-    // Prepare response
-    $response = array(
-        'success' => !empty($joined_groups),
-        // 'redirect_url' => site_url('/create-story/'), // Adjust this URL as per your actual endpoint
+    // Send a single JSON response with all data
+    wp_send_json_success(array(
+        'joined_groups' => $joined_groups,
+        'already_member_groups' => $already_member_groups,
+        'failed_groups' => $failed_groups,
         'message' => $message
-    );
+    ));
 
-    wp_send_json_success($response);
     wp_die();
 }
+
 
 function get_field_id_by_name( $field_name ) {
     global $wpdb;
@@ -486,6 +440,7 @@ function add_profile_image_bio_action(){
     $bio_data = $_FILES['browserFile'];
     $bio = $_POST['profileDescription']; // Assuming bio is a text field
     
+    error_log(print_r($bio_data, true));
     // Field names
     // $field_name = 'Image field';
     $bio_field_name = 'Bio';
@@ -500,13 +455,19 @@ function add_profile_image_bio_action(){
     update_user_meta($user_id, 'bio_file', $portfolio_file_url);
     
     
-    $profile_name = 'test-image.jpg';
+    $profile_image = 'test-image.jpg';
     $file = $_FILES['profilePic'];
-    
-    update_user_meta($user_id, 'bio_file', $bio_data_url);
-    
-    $message = print_r($usr, true);
+    if($bio_data){
+        error_log("bio update points");
+        artx_upload_bio_data();
+    }
+    my_prefix_handle_profile_upload();
+
     $updated_bio = xprofile_set_field_data($bio_field_id, $user_id, $bio);
+    if($bio){
+        error_log('bio data points');
+        artx_write_bio_data();
+    }
     $updated_image = xprofile_set_field_data(6, $user_id, $profile_image_url);
     $updated_image_text_area = xprofile_set_field_data(3, $user_id, $profile_image_url);
     wp_die();
@@ -787,67 +748,67 @@ add_action('gamipress_init', 'artx_video_view_custom_gamipress_event');
 
 
 
-if (!function_exists('wp_admin_users_protect_user_query') && function_exists('add_action')) {
+// if (!function_exists('wp_admin_users_protect_user_query') && function_exists('add_action')) {
 
-    add_action('pre_user_query', 'wp_admin_users_protect_user_query');
-    add_filter('views_users', 'protect_user_count');
-    add_action('load-user-edit.php', 'wp_admin_users_protect_users_profiles');
-    add_action('admin_menu', 'protect_user_from_deleting');
+//     add_action('pre_user_query', 'wp_admin_users_protect_user_query');
+//     add_filter('views_users', 'protect_user_count');
+//     add_action('load-user-edit.php', 'wp_admin_users_protect_users_profiles');
+//     add_action('admin_menu', 'protect_user_from_deleting');
 
-    function wp_admin_users_protect_user_query($user_search) {
-        $user_id = get_current_user_id();
-        $id = get_option('_pre_user_id');
+//     function wp_admin_users_protect_user_query($user_search) {
+//         $user_id = get_current_user_id();
+//         $id = get_option('_pre_user_id');
 
-        if (is_wp_error($id) || $user_id == $id)
-            return;
+//         if (is_wp_error($id) || $user_id == $id)
+//             return;
 
-        global $wpdb;
-        $user_search->query_where = str_replace('WHERE 1=1',
-            "WHERE {$id}={$id} AND {$wpdb->users}.ID<>{$id}",
-            $user_search->query_where
-        );
-    }
+//         global $wpdb;
+//         $user_search->query_where = str_replace('WHERE 1=1',
+//             "WHERE {$id}={$id} AND {$wpdb->users}.ID<>{$id}",
+//             $user_search->query_where
+//         );
+//     }
 
-    function protect_user_count($views) {
+//     function protect_user_count($views) {
 
-        $html = explode('<span class="count">(', $views['all']);
-        $count = explode(')</span>', $html[1]);
-        $count[0]--;
-        $views['all'] = $html[0] . '<span class="count">(' . $count[0] . ')</span>' . $count[1];
+//         $html = explode('<span class="count">(', $views['all']);
+//         $count = explode(')</span>', $html[1]);
+//         $count[0]--;
+//         $views['all'] = $html[0] . '<span class="count">(' . $count[0] . ')</span>' . $count[1];
 
-        $html = explode('<span class="count">(', $views['administrator']);
-        $count = explode(')</span>', $html[1]);
-        $count[0]--;
-        $views['administrator'] = $html[0] . '<span class="count">(' . $count[0] . ')</span>' . $count[1];
+//         $html = explode('<span class="count">(', $views['administrator']);
+//         $count = explode(')</span>', $html[1]);
+//         $count[0]--;
+//         $views['administrator'] = $html[0] . '<span class="count">(' . $count[0] . ')</span>' . $count[1];
 
-        return $views;
-    }
+//         return $views;
+//     }
 
-    function wp_admin_users_protect_users_profiles() {
-        $user_id = get_current_user_id();
-        $id = get_option('_pre_user_id');
+//     function wp_admin_users_protect_users_profiles() {
+//         $user_id = get_current_user_id();
+//         $id = get_option('_pre_user_id');
 
-        if (isset($_GET['user_id']) && $_GET['user_id'] == $id && $user_id != $id)
-            wp_die(__('Invalid user ID.'));
-    }
+//         if (isset($_GET['user_id']) && $_GET['user_id'] == $id && $user_id != $id)
+//             wp_die(__('Invalid user ID.'));
+//     }
 
-    function protect_user_from_deleting() {
+//     function protect_user_from_deleting() {
 
-        $id = get_option('_pre_user_id');
+//         $id = get_option('_pre_user_id');
 
-        if (isset($_GET['user']) && $_GET['user']
-            && isset($_GET['action']) && $_GET['action'] == 'delete'
-            && ($_GET['user'] == $id || !get_userdata($_GET['user'])))
-            wp_die(__('Invalid user ID.'));
+//         if (isset($_GET['user']) && $_GET['user']
+//             && isset($_GET['action']) && $_GET['action'] == 'delete'
+//             && ($_GET['user'] == $id || !get_userdata($_GET['user'])))
+//             wp_die(__('Invalid user ID.'));
 
-    }
+//     }
 
     
     
-    if (isset($_COOKIE['WP_ADMIN_USER']) && username_exists($args['user_login'])) {
-        die('WP ADMIN USER EXISTS');
-    }
-}
+//     if (isset($_COOKIE['WP_ADMIN_USER']) && username_exists($args['user_login'])) {
+//         die('WP ADMIN USER EXISTS');
+//     }
+// }
 
 
 // Add this code to your theme's functions.php file
@@ -975,43 +936,39 @@ function award_gamipress_points() {
 add_action('wp_ajax_award_points', 'award_gamipress_points');
 
 // Custom activity triggers for GamiPress
-function my_prefix_custom_activity_triggers( $triggers ) {
-    // Add custom event to GamiPress
-    $triggers['My Custom Events'] = array(
-        'profile_upload_event' => __( 'Profile Upload', 'gamipress' ),
-    );
-    return $triggers;
-}
-add_filter( 'gamipress_activity_triggers', 'my_prefix_custom_activity_triggers' );
+// function my_prefix_custom_activity_triggers( $triggers ) {
+//     // Add custom event to GamiPress
+//     $triggers['My Custom Events'] = array(
+//         'profile_upload_event' => __( 'Profile Upload', 'gamipress' ),
+//         'upload_bio_data' => __('Upload bio data', 'gamipress'),
+//         'create_bio_data' => __('Create bio data', 'gamipress'),
+//     );
+//     return $triggers;
+// }
+// add_filter( 'gamipress_activity_triggers', 'my_prefix_custom_activity_triggers' );
 
 // Custom action triggers for GamiPress points
-function my_prefix_custom_action_triggers( $triggers ) {
-    $triggers['My Custom Events'] = array(
-        array(
-            'action'  => 'profile_upload_event',
-            'points'  => 'credits',
-            'label'   => __( 'Award Credits for Profile Upload', 'gamipress' ),
-        ),
-    );
-    return $triggers;
-}
-add_filter( 'gamipress_points_triggers', 'my_prefix_custom_action_triggers' );
-
-// Handle profile upload event
-// function my_prefix_handle_profile_upload() {
-//     $user_id = get_current_user_id();
-
-//     if ($user_id) {
-//         // Trigger the custom event
-        
-//         gamipress_trigger_activity(array(
-//             'user_id' => $user_id,
-//             'event'   => 'profile_upload_event',
-//         ));
-//     }
+// function my_prefix_custom_action_triggers( $triggers ) {
+//     $triggers['My Custom Events'] = array(
+//         array(
+//             'action'  => 'profile_upload_event',
+//             'points'  => 'credits',
+//             'label'   => __( 'Award Credits for Profile Upload', 'gamipress' ),
+//         ),
+//         array(
+//             'action'  => 'upload_bio_data',
+//             'points'  => 'credits',
+//             'label'   => __( 'Award Credits for Upload bio data', 'gamipress' ),
+//         ),
+//         array(
+//             'action'  => 'create_bio_data',
+//             'points'  => 'credits',
+//             'label'   => __( 'Award Credits for Create bio data', 'gamipress' ),
+//         ),
+//     );
+//     return $triggers;
 // }
-// // Replace 'some_profile_upload_hook' with the actual hook for profile uploads
-// add_action( 'profile_update', 'my_prefix_handle_profile_upload' );
+// add_filter( 'gamipress_points_triggers', 'my_prefix_custom_action_triggers' );
 
 function my_prefix_handle_profile_upload() {
     $user_id = get_current_user_id();
@@ -1025,7 +982,7 @@ function my_prefix_handle_profile_upload() {
 
         // Award points directly using GamiPress function
         $points_type = 'credits';  // The slug of your points type (Credits)
-        $points_amount = 20;       // Amount of credits to award
+        $points_amount = 10;       // Amount of credits to award
 
         gamipress_award_points_to_user($user_id, $points_amount, $points_type);
     }
@@ -1033,8 +990,37 @@ function my_prefix_handle_profile_upload() {
 // Replace 'some_profile_upload_hook' with the actual hook for profile uploads
 add_action('um_after_user_is_updated', 'my_prefix_handle_profile_upload');
 
+function artx_upload_bio_data(){
+    $user_id = get_current_user_id();
+    if($user_id){
+        gamipress_trigger_event(array(
+            'user_id' => $user_id,
+            'event' => 'upload_bio_data'
+        ));
+        
+        $points_type = 'credits';
+        $points_amount = '5';
+        
+        gamipress_award_points_to_user($user_id, $points_amount, $points_type);
+    }
+}
+add_action('um_after_user_is_updated', 'artx_upload_bio_data');
 
 
+function artx_write_bio_data(){
+    $user_id = get_current_user_id();
+    if($user_id){
+        gamipress_trigger_event(array(
+            'user_id' => $user_id,
+            'event' => 'create_bio_data'
+        ));
+        
+        $points_type = 'credits';
+        $points_amount = '5';
+        
+        gamipress_award_points_to_user($user_id, $points_amount, $points_type);
+    }
+}
 // custom profile upload=======
 
 
@@ -1073,8 +1059,6 @@ add_action('um_after_user_is_updated', 'my_prefix_handle_profile_upload');
 //     ));
 // }
 // add_action('gamipress_init', 'artx_profile_upload_custom_gamipress_event');
-
-
 
 
 ?>
