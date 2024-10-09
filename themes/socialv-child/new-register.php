@@ -30,18 +30,29 @@ Template Name: Custom Registration
                                         ?>
 
         <!-- Carousel Container -->
+        <script>
+            var total_user_names = <?php echo is_array($recent_users)?count($recent_users):0; ?>
+        </script>
         <div class="user-information-carousel common-carousel-block">
-            <div class="user-carousel">
-                <?php foreach ( $recent_users as $user ) : ?>
+        <div class="user-carousel">
+                <?php
+                $users_with_profile_pictures_f = fetch_recent_users_with_profile();
+                foreach ($users_with_profile_pictures_f as $user_data) : ?>
                 <div class="carousel-item">
-                    <?php echo esc_html( $user->display_name ); ?>
+                    <div class="img-and-name">
+                        <!-- Display user profile picture -->
+                        <?php if (!empty($user_data['profile_picture_url'])) : ?>
+                        <img src="<?php echo esc_url($user_data['profile_picture_url']); ?>"
+                            alt="<?php echo esc_attr($user_data['display_name']); ?>" width="50" height="50" />
+                        <?php else : ?>
+                        <?php echo get_avatar($user_data['user_id'], 64); ?>
+                        <?php endif; ?>
+                        <strong><?php echo esc_html($user_data['display_name']); ?></strong>
+                    </div>
                 </div>
                 <?php endforeach; ?>
             </div>
         </div>
-
-
-
         <?php
                 // echo get_the_ID();
                     // Get the ACF field value
@@ -54,7 +65,7 @@ Template Name: Custom Registration
         <div class="credit-div">
             <?php
                         echo '<h2>' . $acf_field_value . '</h2>';  
-                    ?>
+        ?>
 
             <div class="All-points">
                 <div class="credit-points">
@@ -423,13 +434,26 @@ Template Name: Custom Registration
     </div>
     <!-- Carousel Container -->
     <div class="user-information-carousel-bottom common-carousel-block">
-        <div class="user-carousel">
-            <?php foreach ( $recent_users as $user ) : ?>
-            <div class="carousel-item">
-                <?php echo esc_html( $user->display_name ); ?>
-            </div>
-            <?php endforeach; ?>
-        </div>
+                <div class="carousel-wrapper">
+                    <div class="user-carousel">
+                    <?php
+                    $users_with_profile_pictures_f = fetch_recent_users_with_profile();
+                    foreach ($users_with_profile_pictures_f as $user_data) : ?>
+                    <div class="carousel-item">
+                        <div class="img-and-name">
+                            <!-- Display user profile picture -->
+                            <?php if (!empty($user_data['profile_picture_url'])) : ?>
+                            <img src="<?php echo esc_url($user_data['profile_picture_url']); ?>"
+                                alt="<?php echo esc_attr($user_data['display_name']); ?>" width="50" height="50" />
+                            <?php else : ?>
+                            <?php echo get_avatar($user_data['user_id'], 64); ?>
+                            <?php endif; ?>
+                            <strong><?php echo esc_html($user_data['display_name']); ?></strong>
+                        </div>
+                    </div>
+                    <?php endforeach; ?>
+                    </div>
+                </div>
     </div>
 
 
@@ -1691,7 +1715,7 @@ Template Name: Custom Registration
                         <div class="tooltiptext">
                             <?php
                                 $join_the_group_tool_tip = get_post_meta(get_the_ID(),'3_join_the_group_tool_tip', true);
-                                echo '<h4>' .  $join_the_group_tool_tip . '</h4>';
+                                echo '<p>' .  $join_the_group_tool_tip . '</p>';
                             ?>
                         </div>
                     </div>
@@ -2885,12 +2909,12 @@ $users_with_profile_pictures = fetch_recent_users_with_profile();
                 ?>
                 <!-- start hover icon-->
                 <div class="heading-tooltip">
-                    <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <svg width="23" height="22" viewBox="0 0 23 22" fill="#c725d6" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" clip-rule="evenodd"
-                            d="M10.7083 8.25309C10.2023 8.25309 9.79167 7.84151 9.79167 7.33643C9.79167 6.83134 10.2023 6.41976 10.7083 6.41976C11.2143 6.41976 11.625 6.83134 11.625 7.33643C11.625 7.84151 11.2143 8.25309 10.7083 8.25309ZM11.625 14.6698H9.79167C9.53867 14.6698 9.33333 14.4644 9.33333 14.2114C9.33333 13.9584 9.53867 13.7531 9.79167 13.7531H10.25V10.0864H9.79167C9.53867 10.0864 9.33333 9.88109 9.33333 9.62809C9.33333 9.37509 9.53867 9.16976 9.79167 9.16976H10.7083C10.9613 9.16976 11.1667 9.37509 11.1667 9.62809V13.7531H11.625C11.878 13.7531 12.0833 13.9584 12.0833 14.2114C12.0833 14.4644 11.878 14.6698 11.625 14.6698ZM10.7083 2.75309C6.41192 2.75309 2.91667 6.24834 2.91667 10.5448C2.91667 14.8412 6.41192 18.3364 10.7083 18.3364C15.0047 18.3364 18.5 14.8412 18.5 10.5448C18.5 6.24834 15.0047 2.75309 10.7083 2.75309ZM10.7083 19.2531C5.90683 19.2531 2 15.3463 2 10.5448C2 5.74326 5.90683 1.83643 10.7083 1.83643C15.5098 1.83643 19.4167 5.74326 19.4167 10.5448C19.4167 15.3463 15.5098 19.2531 10.7083 19.2531Z"
-                            fill="url(#paint0_linear_1_973)" />
+                            d="M11.2083 8.25309C10.7023 8.25309 10.2917 7.84151 10.2917 7.33643C10.2917 6.83134 10.7023 6.41976 11.2083 6.41976C11.7143 6.41976 12.125 6.83134 12.125 7.33643C12.125 7.84151 11.7143 8.25309 11.2083 8.25309ZM12.125 14.6698H10.2917C10.0387 14.6698 9.83333 14.4644 9.83333 14.2114C9.83333 13.9584 10.0387 13.7531 10.2917 13.7531H10.75V10.0864H10.2917C10.0387 10.0864 9.83333 9.88109 9.83333 9.62809C9.83333 9.37509 10.0387 9.16976 10.2917 9.16976H11.2083C11.4613 9.16976 11.6667 9.37509 11.6667 9.62809V13.7531H12.125C12.378 13.7531 12.5833 13.9584 12.5833 14.2114C12.5833 14.4644 12.378 14.6698 12.125 14.6698ZM11.2083 2.75309C6.91192 2.75309 3.41667 6.24834 3.41667 10.5448C3.41667 14.8412 6.91192 18.3364 11.2083 18.3364C15.5047 18.3364 19 14.8412 19 10.5448C19 6.24834 15.5047 2.75309 11.2083 2.75309ZM11.2083 19.2531C6.40683 19.2531 2.5 15.3463 2.5 10.5448C2.5 5.74326 6.40683 1.83643 11.2083 1.83643C16.0098 1.83643 19.9167 5.74326 19.9167 10.5448C19.9167 15.3463 16.0098 19.2531 11.2083 19.2531Z"
+                            fill="#c725d6" />
                         <defs>
-                            <linearGradient id="paint0_linear_1_973" x1="10.7083" y1="1.83643" x2="10.7083" y2="19.2531"
+                            <linearGradient id="paint0_linear_1_151" x1="11.2083" y1="1.83643" x2="11.2083" y2="19.2531"
                                 gradientUnits="userSpaceOnUse">
                                 <stop stop-color="#C725D6" />
                                 <stop offset="1" stop-color="#D57490" />
@@ -3010,7 +3034,7 @@ $users_with_profile_pictures = fetch_recent_users_with_profile();
 
         <!--additional block end-->
     </div>
-    <div class="user-information-carousel-bottom-step5  ">
+    <div class="user-information-carousel-bottom-step5 user-information-carousel-bottom user-details common-carousel-block">
         <div class="user-carousel">
             <?php foreach ($recent_users_with_stories as $user_story) : ?>
             <div class="carousel-item">

@@ -105,18 +105,35 @@ $('#phone_number').on('keypress', function (e) {
 
 // tooltip ==================================
 
+
+function debounce(func, delay) {
+    let timer;
+    return function() {
+        const context = this;
+        const args = arguments;
+        clearTimeout(timer);
+        timer = setTimeout(() => {
+            func.apply(context, args);
+        }, delay);
+    };
+}
+
+
 $(document).ready(function() {
     $('#invitation-heading').hover(
-    function() {
-        console.log('inside');
-        $('#tooltip-block-heading').show();  // Show the div on hover
-    },
-    function() {
-                console.log('outside');
+        function() {
+            console.log('inside');
+            $('#tooltip-block-heading').show();  // Show the div on hover
+            $('#tooltip-block-heading').css('pointer-events', 'all');  // Enable pointer events
+        },
+        // debounce(function() {
+        // //     console.log('outside');
+        // //     $('#tooltip-block-heading').hide();  // Hide the div when no longer hovering
+        // //     $('#tooltip-block-heading').css('pointer-events', 'none');  // Disable pointer events
+        // // }, 200)
+    );
 
-        $('#tooltip-block-heading').hide();  // Hide the div when no longer hovering
-    }
-);
+
 
     $('#hover-for-email').hover(
     function() {
@@ -147,90 +164,126 @@ $('#user-information-heading').hover(
     }
 );
 
-$('#hover-for-firstname').hover(
-    function() {
-        $('#tooltip-user-firstname').show();
-    },
-    function() {
-        $('#tooltip-user-firstname').hide();
-    }
-);
+// $('#hover-for-firstname').hover(
+//     function() {
+//         $('#tooltip-user-firstname').show();
+//     },
+//     function() {
+//         $('#tooltip-user-firstname').hide();
+//     }
+// );
 
-$('#hover-for-lastname').hover(
-    function() {
-        $('#tooltip-user-lastname').show();
-    },
-    function() {
-        $('#tooltip-user-lastname').hide();
-    }
-);
+// $('#hover-for-lastname').hover(
+//     function() {
+//         $('#tooltip-user-lastname').show();
+//     },
+//     function() {
+//         $('#tooltip-user-lastname').hide();
+//     }
+// );
 
-$('#hover-for-username').hover(
-    function() {
-        $('#tooltip-user-username').show();
-    },
-    function() {
-        $('#tooltip-user-username').hide();
-    }
-);
+// $('#hover-for-username').hover(
+//     function() {
+//         $('#tooltip-user-username').show();
+//     },
+//     function() {
+//         $('#tooltip-user-username').hide();
+//     }
+// );
 
-$('#hover-for-phonenumber').hover(
-    function() {
-        $('#tooltip-user-phonenumber').show();
-    },
-    function() {
-        $('#tooltip-user-phonenumber').hide();
-    }
-);
+// $('#hover-for-phonenumber').hover(
+//     function() {
+//         $('#tooltip-user-phonenumber').show();
+//     },
+//     function() {
+//         $('#tooltip-user-phonenumber').hide();
+//     }
+// );
 
-$('#hover-for-password').hover(
-    function() {
-        $('#tooltip-user-password').show();
-    },
-    function() {
-        $('#tooltip-user-password').hide();
-    }
-);
+// $('#hover-for-password').hover(
+//     function() {
+//         $('#tooltip-user-password').show();
+//     },
+//     function() {
+//         $('#tooltip-user-password').hide();
+//     }
+// );
 
-$('#hover-for-confirm-pass').hover(
-    function() {
-        $('#tooltip-user-confirmpassword').show();
-    },
-    function() {
-        $('#tooltip-user-confirmpassword').hide();
-    }
-);
+// $('#hover-for-confirm-pass').hover(
+//     function() {
+//         $('#tooltip-user-confirmpassword').show();
+//     },
+//     function() {
+//         $('#tooltip-user-confirmpassword').hide();
+//     }
+// );
 
 });
 
 //  ============================================
 
-jQuery(document).ready(function($) {
-    $('.user-carousel').slick({
-        slidesToShow: 4,  
-        slidesToScroll: 1,  
-        autoplay: true,  
-        autoplaySpeed: 2000,  
-        dots: false,  
-        arrows: false,  
-        responsive: [
-            {
-                breakpoint: 1024,
-                settings: {
-                    slidesToShow: 2,
-                    slidesToScroll: 1
-                }
-            },
-            {
-                breakpoint: 600,
-                settings: {
-                    slidesToShow: 1,
-                    slidesToScroll: 1
-                }
-            }
-        ]
+// jQuery(document).ready(function($) {
+//     $('.user-carousel').slick({
+//         slidesToShow: 4,  
+//         slidesToScroll: 1,  
+//         autoplay: true,  
+//         autoplaySpeed: 2000,  
+//         dots: false,  
+//         arrows: false,  
+//         responsive: [
+//             {
+//                 breakpoint: 1024,
+//                 settings: {
+//                     slidesToShow: 2,
+//                     slidesToScroll: 1
+//                 }
+//             },
+//             {
+//                 breakpoint: 600,
+//                 settings: {
+//                     slidesToShow: 1,
+//                     slidesToScroll: 1
+//                 }
+//             }
+//         ]
+//     });
+// });
+
+
+document.addEventListener('DOMContentLoaded', function() {
+    const carousel = document.querySelector('.user-carousel');
+    const items = carousel.querySelectorAll('.carousel-item');
+    
+    // Clone items and append to carousel
+    items.forEach(item => {
+        const clone = item.cloneNode(true);
+        carousel.appendChild(clone);
     });
+    
+    // Calculate total items and set carousel width
+    const totalItems = items.length * 2; // Original + cloned items
+    const itemWidth = items[0].offsetWidth; // Get the width of a single item
+    carousel.style.width = `${itemWidth * totalItems}px`; // Set the carousel width
+
+    let position = 0;
+    const speed = 0.5; // Adjust for faster/slower scrolling
+
+    function step() {
+        position -= speed;
+
+        // Reset position when the first set of items has scrolled out of view
+        if (Math.abs(position) >= itemWidth * items.length) {
+            position = 0; // Reset to the start
+        }
+
+        // Apply the transform to create the scrolling effect
+        carousel.style.transform = `translateX(${position}px)`;
+        requestAnimationFrame(step);
+    }
+
+    requestAnimationFrame(step);
 });
+
 // ==============================
 
 
@@ -329,7 +382,7 @@ function nextStep(step) {
 // document.getElementById('add_to_group_btn').addEventListener('click', function(event) {
 //     event.preventDefault();  
 //     nextStep(3);  
-// });
+// }); 
  
 console.log('hello page'); 
     
@@ -605,9 +658,7 @@ $('#validate_invitation_code').on('click', function (event) {
             processData: false,
             success:function(response){
                 hideLoader();
-                console.log("inside 4th");
                 nextStep(4); 
-                console.log("outside 4th");
                 $('#upload-file-container').hide();
                 $('#featured-story-container').show();
                alert(`You have earned ${totalPoints} points so far!`);

@@ -20,7 +20,46 @@ Use it to make something cool, have fun, and share what you've learned with othe
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
 
 
+/*carousel by vikas*/
 
+.common-carousel-block{
+    overflow:hidden;
+}
+.user-information-carousel {
+    width: 95%;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+.user-carousel {
+    display: flex;
+    animation: scroll 30s linear infinite!important;
+    gap:100px;
+    justify-content:space-around;
+    width:min-content;
+}
+
+.carousel-item {
+    flex: 0 0 auto;
+    padding: 0 20px;
+    white-space: nowrap;
+    position:unset;
+    display:block;
+    width:unset;
+    margin:unset;
+    color:#fff;
+}
+
+@keyframes scroll {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+/* end carousel by vikas */
 
 .tooltip {
     position: absolute;
@@ -331,7 +370,7 @@ Use it to make something cool, have fun, and share what you've learned with othe
 .TR-form {
     width: 100%;
     height: 100vh;
-    background-image: url("https://artxhub.com/wp-content/themes/socialv-child/images/thirdpage.png") !important;
+    background-image: url("https://artxhub.com/wp-content/themes/socialv-child/images/ThirdPage.png") !important;
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
@@ -1122,68 +1161,557 @@ textarea::placeholder {
     opacity: 1;
 }
 
-@media(max-width:1440px) {
-    .second-form {
-        top: 1%;
-    }
 
-    .frth-form {
-        top: 2%;
-    }
+/*Loader css*/
 
-    .browser-files {
 
-        /*padding-top: 44px;*/
-    }
+#page_loader {
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background-color: #00000050;
+    z-index: 999;
+    pointer-events: none;
+    opacity: 0;
+    /* display: block; */
+}
 
-    .textarea-contnt {
-        margin-top: -90px;
-    }
+#page_loader img {
+    mix-blend-mode: hard-light;
+    max-width: 50px;
+}
+
+.ajax-loader-brakes {
+    position: relative;
+}
+
+.ajax-loader-brakes::before {
+    content: "";
+    position: absolute;
+    background: url(../images/ajax-loader.gif) no-repeat center/ 50px, #00000020;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 6px;
+}
+
+
+.btn-grp p {
+    margin: 0;
+
+    font-family: 'Bebas Neue';
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 16.8px;
+    text-align: center;
+    color: #F15CFF;
+
+    max-width: 190px;
+    overflow-wrap: break-word;
+}
+
+
+
+/* activity upload photo css*/
+
+#drag-drop-area .rtm-select-files {
+    display: none;
+}
+
+select#rtSelectPrivacy:nth-child(3) {
+    display: none;
+}
+
+/*new css*/
+/*.credit-content{*/
+/*    display: flex;*/
+/*    align-items: flex-end;*/
+/*    text-align: center;*/
+/*}*/
+.credit-div {
+    position: relative;
+}
+
+.All-points {
+    position: absolute;
+    top: 0;
+    right: 110px;
+}
+
+.credit-points {
+    position: relative;
+    top: 0;
+    height: 30px;
+}
+
+.credit-content {
+    display: flex;
+    align-items: flex-end;
+    gap: 10px;
+    position: absolute;
+    left: 15%;
+    top: 25px;
+
+}
+
+.credit-points svg {
+    stroke: url(#gradientStrokeCredit);
+    /* Applies the gradient to the stroke */
+    fill: rgba(255, 255, 255, 0.05) !important;
+    stroke-width: 1.2px;
+    filter: drop-shadow(12px 12px 60px rgba(158, 64, 144, 0.25));
+}
+
+.SECOND-form .credit-points svg {
+    stroke: url(#gradientStrokeCredit2);
+    /* Applies the gradient to the stroke */
+    fill: rgba(255, 255, 255, 0.05) !important;
+    stroke-width: 1.2px;
+    filter: drop-shadow(12px 12px 60px rgba(158, 64, 144, 0.25));
+}
+
+.THIRD-form .credit-points svg,
+.THIRD-form .additional-block-svg svg,
+.tooltip-svg {
+    stroke: url(#gradientStrokeCredit3);
+    /* Applies the gradient to the stroke */
+    fill: rgba(255, 255, 255, 0.05) !important;
+    stroke-width: 1.2px;
+    filter: drop-shadow(12px 12px 60px rgba(158, 64, 144, 0.25));
+}
+
+.FOURTH-form .credit-points svg {
+    stroke: url(#gradientStrokeCredit4);
+    /* Applies the gradient to the stroke */
+    fill: rgba(255, 255, 255, 0.05) !important;
+    stroke-width: 1.2px;
+    filter: drop-shadow(12px 12px 60px rgba(158, 64, 144, 0.25));
+}
+
+.Fifth-final-form .credit-points svg {
+    stroke: url(#gradientStrokeCredit5);
+    /* Applies the gradient to the stroke */
+    fill: rgba(255, 255, 255, 0.05) !important;
+    stroke-width: 1.2px;
+    filter: drop-shadow(12px 12px 60px rgba(158, 64, 144, 0.25));
+}
+
+.additional-block-svg svg,
+.tooltip-svg svg {
+    stroke: url(#gradientStrokeBlock);
+    /* Applies the gradient to the stroke */
+    fill: rgba(255, 255, 255, 0.05) !important;
+    stroke-width: 1.2px;
+    filter: drop-shadow(12px 12px 60px rgba(158, 64, 144, 0.25));
+}
+
+.inside-credits {
+    font-family: "Playfair Display";
+    font-size: 30.77px;
+    font-weight: 400;
+    line-height: 41.02px;
+    text-align: center;
+    color: #fff;
+}
+
+.tooltip-svg {
+    position: relative;
+
+}
+
+.tooltiptext {
+    position: absolute;
+    top: 27%;
+    left: 12%;
+    width: 160px;
+    overflow-y: scroll;
+    height: 76px;
+
+}
+
+.tooltiptext h4 {
+    font-family: 'Bebas Neue';
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 22.4px;
+    text-align: center;
+    color: #fff;
+}
+
+.tooltip-heading {
+    position: absolute;
+    right: 10px;
+    cursor: pointer;
+    font-size: 20px;
+    color: #007BFF;
+    margin-top: -67px;
+}
+
+.invit-heading {
+    display: flex;
+    align-items: baseline;
+    /*gap:5px;*/
+}
+
+#invitation-heading {
+    cursor: pointer;
+}
+
+.user-information-carousel {
+    text-align: center;
+    max-width: 95%;
+    margin: 0 auto;
+    background: #2B2232;
+    border-radius: 20px;
+    border: 1px solid rgba(199, 37, 214, 1);
+}
+.user-information-carousel{
+    height: 40px;
+}
+
+.user-information-carousel-bottom {
+    position: absolute;
+    bottom: 11px;
+    text-align: center;
+    max-width: 95%;
+    margin: 0 32px;
+    background: #2B2232;
+    border-radius: 20px;
+    border: 1px solid rgba(199, 37, 214, 1);
+}
+.user-information-carousel-bottom{
+    height: 40px;
+}
+
+.common-carousel-block {
+    height: 50px;
+    display: flex;
+    align-items: center;
+}
+
+.inside-credit {
+    font-family: 'Playfair Display';
+    font-size: 30.77px;
+    font-weight: 400;
+    line-height: 41.02px;
+    text-align: center;
+    color: #fff;
+}
+
+.slick-slide {
+    color: #fff !important;
+}
+
+.form-column-container .form-row {
+    position: relative;
+}
+
+.user-details {
+    margin-top: 30px;
+    position: unset;
+
+}
+
+.invitation-code-tooltip {
+    position: absolute;
+
+    display: none;
+
+}
+
+#tooltip-block-heading {
+
+    top: -18%;
+    left: 82%;
+
+}
+
+#tooltip-block-email {
+
+    top: 2%;
+    left: 85%;
 
 
 }
 
-@media (max-width: 1280px) {
+#tooltip-block-invitatincode {
 
-    /*.cntn-txtblock {*/
-    /*    left: 23%;*/
-    /*}*/
-    textarea {
-        height: 143px;
-    }
-
-    .story-svg svg {
-        height: 400px;
-    }
-
-    .textarea-contnt {
-
-        HEIGHT: 373PX;
-    }
-
-}
-
-@media (max-width:1024px) {
-
-    .first-form {
-        left: 50%;
-    }
-
-    .third-form {
-        left: 16%;
-    }
-
-
+    top: 24%;
+    left: 85%;
 
 
 }
 
+.additional-container {
+    position: absolute;
+    top: 25%;
+    left: 100%;
+}
+
+.additional-block-content {
+    position: absolute;
+    width: 500px;
+    top: -90px;
+    left: 230px;
+    font-family: 'Bebas Neue';
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 22.4px;
+    text-align: center;
+    color: #fff;
+    height: 348px;
+    overflow-y: scroll;
+    background: #0f0f0f70;
+    padding: 10px;
+    border-radius: 20px;
+
+}
+.second-additional-block .additional-block-content{
+    top: -110px;
+    left: 230px;
+    height: 428px;
+}
+.third-additional-block .additional-block-content{
+    top: -80px;
+    left: 230px;
+    height: 348px;
+}
+.additional-container-step4  .additional-block-content{
+    top: -60px;
+}
+.additional-container-step5 .additional-block-content{
+    top: -80px;
+    height: 441px;
+}
+
+.second-additional-block {
+    top: 29%;
+    left: 97%;
+}
+
+/*.slick-track{*/
+/*    top: 9px !important;*/
+/*}*/
+
+.artx-THIRD-form .artx-form-common {
+    width: 460px;
+
+}
+
+.artx-THIRD-form .invit-heading {
+    gap: 2px;
+    margin-bottom: 10px;
+
+}
+
+.heading-tooltip:hover {
+    cursor: pointer!important;
+
+}
+
+/*    .heading-tooltip:hover + .invitation-code-tool {*/
+/*    display: block;*/
+/*}*/
+
+/*.invitation-code-tool {*/
+/*    display: none;  */
+/*    position: absolute;  */
+
+/*}*/
+
+.heading-tooltip {
+    position: relative;
+}
+
+.heading-tooltip .invitation-code-tool {
+    display: none;
+    position: absolute;
+    z-index: 10;
+    /*top: -44%;*/
+    /*right: -46%;*/
+    top: -110px;
+
+    left: 20px;
+}
+
+.heading-tooltip:hover .invitation-code-tool {
+    display: block;
+    /* Show the tooltip when hovering */
+}
+
+#tooltip-user-heading {
+
+    top: -2%;
+    left: 61%;
+
+}
+
+#tooltip-user-firstname {
+
+    top: 11%;
+    left: 48%;
+
+
+}
+
+#tooltip-user-username {
+
+    top: 25%;
+    left: 48%;
+
+}
+
+#tooltip-user-password {
+
+    top: 41%;
+    left: 48%;
+
+}
+
+#tooltip-user-lastname {
+    top: 11%;
+    left: 80%;
+}
+
+#tooltip-user-phonenumber {
+    top: 26%;
+    left: 80%;
+}
+
+#tooltip-user-confirmpassword {
+    top: 41%;
+    left: 80%;
+}
+
+.slick-list {
+    /*height:35px;*/
+}
+
+.additional-container-step4 {
+    position: absolute;
+    top: 42%;
+    left: 100%;
+}
+
+.artx-FOURTH-form {
+    position: relative;
+    width: 800px;
+}
+
+
+
+.user-carousel .carousel-item img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.user-carousel .carousel-item strong {
+    font-size: 16px;
+    line-height: 40px;
+    max-height: 40px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+
+.img-and-name {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.additional-container-step5 {
+    position: absolute;
+    top: 19%;
+    left: 103%;
+}
+
+.credit-fifth {
+    left: 12%;
+    gap: 2px;
+}
+
+.user-detail {
+    margin-top: 6px;
+}
+
+.user-information-carousel-bottom-step5 {
+    position: unset;
+    text-align: center;
+    max-width: 95%;
+    margin: 0 32px;
+    margin-top: 100px;
+    background: #2B2232;
+    border-radius: 20px;
+    border: 1px solid rgba(199, 37, 214, 1);
+    height: 40px;
+}
+
+.additional-block-content h4 {
+    color: white;
+}
+
+.THIRD-form .user-information-carousel-bottom {
+    position: absolute;
+    bottom: 0px;
+}
+
+.user-information-carousel-bottom-step5 {
+    position: absolute;
+    bottom: 10px;
+}
+.tooltiptext{
+    position: absolute;
+    top: 33%;
+    left: 12%;
+    width: 160px;
+    overflow-y: scroll;
+    height: 76px;
+}
+#tooltip-block-heading {
+    top: -4%;
+    left: 47%;
+}
+#tooltip-user-heading{
+    top: -1%;
+    left: 48%;
+}
+#tooltip-group-heading .tooltiptext p{
+    font-family: 'Bebas Neue';
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 22.4px;
+    text-align: center;
+    color: #fff;
+    margin: unset;
+}
+#join-group-heading{
+    position: relative;
+    top: -5px;
+    left: -30px;
+}
+#invitation-heading{
+    top: -5px;
+}
 @media(max-width:767px) {
     .ArtX-heading h2 {
         font-size: 50px;
     }
 
-
+    #invitation-heading{
+        top: 0;
+    }
     .ArtX-heading p {
         font-size: 15px;
         margin: 0px 20px;
@@ -1499,521 +2027,14 @@ textarea::placeholder {
         width: 316px;
 
     }
+    #join-group-heading{
+        top: 0;
+        left: 0;
+    }
 
 
-
-}
-
-
-
-
-/*Loader css*/
-
-
-#page_loader {
-    position: fixed;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    background-color: #00000050;
-    z-index: 999;
-    pointer-events: none;
-    opacity: 0;
-    /* display: block; */
-}
-
-#page_loader img {
-    mix-blend-mode: hard-light;
-    max-width: 50px;
-}
-
-.ajax-loader-brakes {
-    position: relative;
-}
-
-.ajax-loader-brakes::before {
-    content: "";
-    position: absolute;
-    background: url(../images/ajax-loader.gif) no-repeat center/ 50px, #00000020;
-    z-index: 1;
-    width: 100%;
-    height: 100%;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    border-radius: 6px;
-}
-
-
-.btn-grp p {
-    margin: 0;
-
-    font-family: 'Bebas Neue';
-    font-size: 14px;
-    font-weight: 400;
-    line-height: 16.8px;
-    text-align: center;
-    color: #F15CFF;
-
-    max-width: 190px;
-    overflow-wrap: break-word;
-}
-
-
-
-/* activity upload photo css*/
-
-#drag-drop-area .rtm-select-files {
-    display: none;
-}
-
-select#rtSelectPrivacy:nth-child(3) {
-    display: none;
-}
-
-/*new css*/
-/*.credit-content{*/
-/*    display: flex;*/
-/*    align-items: flex-end;*/
-/*    text-align: center;*/
-/*}*/
-.credit-div {
-    position: relative;
-}
-
-.All-points {
-    position: absolute;
-    top: 0;
-    right: 110px;
-}
-
-.credit-points {
-    position: relative;
-    top: 0;
-    height: 30px;
-}
-
-.credit-content {
-    display: flex;
-    align-items: flex-end;
-    gap: 10px;
-    position: absolute;
-    left: 15%;
-    top: 25px;
-
-}
-
-.credit-points svg {
-    stroke: url(#gradientStrokeCredit);
-    /* Applies the gradient to the stroke */
-    fill: rgba(255, 255, 255, 0.05) !important;
-    stroke-width: 1.2px;
-    filter: drop-shadow(12px 12px 60px rgba(158, 64, 144, 0.25));
-}
-
-.SECOND-form .credit-points svg {
-    stroke: url(#gradientStrokeCredit2);
-    /* Applies the gradient to the stroke */
-    fill: rgba(255, 255, 255, 0.05) !important;
-    stroke-width: 1.2px;
-    filter: drop-shadow(12px 12px 60px rgba(158, 64, 144, 0.25));
-}
-
-.THIRD-form .credit-points svg,
-.THIRD-form .additional-block-svg svg,
-.tooltip-svg {
-    stroke: url(#gradientStrokeCredit3);
-    /* Applies the gradient to the stroke */
-    fill: rgba(255, 255, 255, 0.05) !important;
-    stroke-width: 1.2px;
-    filter: drop-shadow(12px 12px 60px rgba(158, 64, 144, 0.25));
-}
-
-.FOURTH-form .credit-points svg {
-    stroke: url(#gradientStrokeCredit4);
-    /* Applies the gradient to the stroke */
-    fill: rgba(255, 255, 255, 0.05) !important;
-    stroke-width: 1.2px;
-    filter: drop-shadow(12px 12px 60px rgba(158, 64, 144, 0.25));
-}
-
-.Fifth-final-form .credit-points svg {
-    stroke: url(#gradientStrokeCredit5);
-    /* Applies the gradient to the stroke */
-    fill: rgba(255, 255, 255, 0.05) !important;
-    stroke-width: 1.2px;
-    filter: drop-shadow(12px 12px 60px rgba(158, 64, 144, 0.25));
-}
-
-.additional-block-svg svg,
-.tooltip-svg svg {
-    stroke: url(#gradientStrokeBlock);
-    /* Applies the gradient to the stroke */
-    fill: rgba(255, 255, 255, 0.05) !important;
-    stroke-width: 1.2px;
-    filter: drop-shadow(12px 12px 60px rgba(158, 64, 144, 0.25));
-}
-
-.inside-credits {
-    font-family: "Playfair Display";
-    font-size: 30.77px;
-    font-weight: 400;
-    line-height: 41.02px;
-    text-align: center;
-    color: #fff;
-}
-
-.tooltip-svg {
-    position: relative;
-
-}
-
-.tooltiptext {
-    position: absolute;
-    top: 27%;
-    left: 12%;
-    width: 160px;
-    overflow-y: scroll;
-    height: 76px;
-
-}
-
-.tooltiptext h4 {
-    font-family: 'Bebas Neue';
-    font-size: 14px;
-    font-weight: 400;
-    line-height: 22.4px;
-    text-align: center;
-    color: #fff;
-}
-
-.tooltip-heading {
-    position: absolute;
-    right: 10px;
-    cursor: pointer;
-    font-size: 20px;
-    color: #007BFF;
-    margin-top: -67px;
-}
-
-.invit-heading {
-    display: flex;
-    align-items: baseline;
-    /*gap:5px;*/
-}
-
-#invitation-heading {
-    cursor: pointer;
-}
-
-.user-information-carousel {
-    text-align: center;
-    max-width: 95%;
-    margin: 0 auto;
-    background: #2B2232;
-    border-radius: 20px;
-    border: 1px solid rgba(199, 37, 214, 1);
-}
-.user-information-carousel{
-    height: 50px;
-}
-
-.user-information-carousel-bottom {
-    position: absolute;
-    bottom: 11px;
-    text-align: center;
-    max-width: 95%;
-    margin: 0 32px;
-    background: #2B2232;
-    border-radius: 20px;
-    border: 1px solid rgba(199, 37, 214, 1);
-}
-.user-information-carousel-bottom{
-    height: 50px;
-}
-
-.common-carousel-block {
-    height: 50px;
-    padding-top: 10px;
-}
-
-.inside-credit {
-    font-family: 'Playfair Display';
-    font-size: 30.77px;
-    font-weight: 400;
-    line-height: 41.02px;
-    text-align: center;
-    color: #fff;
-}
-
-.slick-slide {
-    color: #fff !important;
-}
-
-.form-column-container .form-row {
-    position: relative;
-}
-
-.user-details {
-    margin-top: 30px;
-    position: unset;
-
-}
-
-.invitation-code-tooltip {
-    position: absolute;
-
-    display: none;
-
-}
-
-#tooltip-block-heading {
-
-    top: -18%;
-    left: 82%;
-
-}
-
-#tooltip-block-email {
-
-    top: 2%;
-    left: 85%;
-
-
-}
-
-#tooltip-block-invitatincode {
-
-    top: 24%;
-    left: 85%;
-
-
-}
-
-.additional-container {
-    position: absolute;
-    top: 25%;
-    left: 100%;
-}
-
-.additional-block-content {
-    position: absolute;
-    width: 500px;
-    top: -90px;
-    left: 230px;
-    font-family: 'Bebas Neue';
-    font-size: 18px;
-    font-weight: 600;
-    line-height: 22.4px;
-    text-align: center;
-    color: #fff;
-    height: 348px;
-    overflow-y: scroll;
-    background: #0f0f0f70;
-    padding: 10px;
-    border-radius: 20px;
-
-}
-.second-additional-block .additional-block-content{
-    top: -110px;
-    left: 230px;
-    height: 428px;
-}
-.third-additional-block .additional-block-content{
-    top: -80px;
-    left: 230px;
-    height: 348px;
-}
-.additional-container-step4  .additional-block-content{
-    top: -60px;
-}
-.additional-container-step5 .additional-block-content{
-    top: -80px;
-    height: 441px;
-}
-
-.second-additional-block {
-    top: 29%;
-    left: 97%;
-}
-
-/*.slick-track{*/
-/*    top: 9px !important;*/
-/*}*/
-
-.artx-THIRD-form .artx-form-common {
-    width: 460px;
-
-}
-
-.artx-THIRD-form .invit-heading {
-    gap: 2px;
-    margin-bottom: 10px;
-
-}
-
-.heading-tooltip:hover {
-    cursor: pointer;
-
-}
-
-/*    .heading-tooltip:hover + .invitation-code-tool {*/
-/*    display: block;*/
-/*}*/
-
-/*.invitation-code-tool {*/
-/*    display: none;  */
-/*    position: absolute;  */
-
-/*}*/
-
-.heading-tooltip {
-    position: relative;
-}
-
-.heading-tooltip .invitation-code-tool {
-    display: none;
-    position: absolute;
-    z-index: 10;
-    /*top: -44%;*/
-    /*right: -46%;*/
-    top: -110px;
-
-    left: 20px;
-}
-
-.heading-tooltip:hover .invitation-code-tool {
-    display: block;
-    /* Show the tooltip when hovering */
-}
-
-#tooltip-user-heading {
-
-    top: -2%;
-    left: 61%;
-
-}
-
-#tooltip-user-firstname {
-
-    top: 11%;
-    left: 48%;
-
-
-}
-
-#tooltip-user-username {
-
-    top: 25%;
-    left: 48%;
-
-}
-
-#tooltip-user-password {
-
-    top: 41%;
-    left: 48%;
-
-}
-
-#tooltip-user-lastname {
-    top: 11%;
-    left: 80%;
-}
-
-#tooltip-user-phonenumber {
-    top: 26%;
-    left: 80%;
-}
-
-#tooltip-user-confirmpassword {
-    top: 41%;
-    left: 80%;
-}
-
-.slick-list {
-    /*height:35px;*/
-}
-
-.additional-container-step4 {
-    position: absolute;
-    top: 42%;
-    left: 100%;
-}
-
-.artx-FOURTH-form {
-    position: relative;
-    width: 800px;
-}
-
-
-
-.user-carousel .carousel-item img {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    object-fit: cover;
-}
-
-.user-carousel .carousel-item strong {
-    font-size: 16px;
-    line-height: 40px;
-    max-height: 40px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-
-.img-and-name {
-    display: flex;
-    gap: 20px;
-    align-items: center;
-}
-
-.additional-container-step5 {
-    position: absolute;
-    top: 19%;
-    left: 103%;
-}
-
-.credit-fifth {
-    left: 12%;
-    gap: 2px;
-}
-
-.user-detail {
-    margin-top: 6px;
-}
-
-.user-information-carousel-bottom-step5 {
-    position: unset;
-    text-align: center;
-    max-width: 95%;
-    margin: 0 32px;
-    margin-top: 100px;
-    background: #2B2232;
-    border-radius: 20px;
-    border: 1px solid rgba(199, 37, 214, 1);
-}
-
-.additional-block-content h4 {
-    color: white;
 }
 
-.THIRD-form .user-information-carousel-bottom {
-    position: absolute;
-    bottom: 0px;
-}
-
-.user-information-carousel-bottom-step5 {
-    position: absolute;
-    bottom: 0px;
-}
 
 @media(min-width: 1920px) {
     .ArtX-heading h2 {
@@ -2317,6 +2338,140 @@ select#rtSelectPrivacy:nth-child(3) {
     } */
 }
 
+@media(max-width:1440px) {
+    .second-form {
+        top: 1%;
+    }
+
+    .frth-form {
+        top: 2%;
+    }
+
+    .browser-files {
+
+        /*padding-top: 44px;*/
+    }
+
+    .textarea-contnt {
+        margin-top: -90px;
+    }
+
+
+}
+
+@media (max-width: 1280px) {
+
+    /*.cntn-txtblock {*/
+    /*    left: 23%;*/
+    /*}*/
+    textarea {
+        height: 143px;
+    }
+
+    .story-svg svg {
+        height: 400px;
+    }
+
+    .textarea-contnt {
+
+        HEIGHT: 373PX;
+    }
+
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+
+    .first-form {
+        left: 50%;
+    }
+
+    .third-form {
+        left: 16%;
+    }
+
+    .All-points{
+        top: -20px;
+        right: 10px;
+    }
+    .artx-ffth-form{
+        top: 25px;
+        left: 78px;
+    }
+    .artx-ffth-form .additional-container .additional-block-content{
+        top: 290px;
+        left: -550px;
+        height: 218px;
+        background: 0 0;
+        padding: 0;
+    }
+    #tooltip-block-heading .tooltip-svg {
+        position: relative;
+        top: 48px;
+        left: -210px;
+    }
+    #personal-details-container .user-information-carousel-bottom{
+        margin-top: 30px;
+        position: absolute;
+        bottom: 10px;
+    }
+    .artx-SECOND-form{
+        left: 25px;
+        top: -40px;
+    }
+    .second-additional-block .additional-block-content{
+        top: 340px;
+        left: -580px;
+        height: 190px;
+        background: unset;
+        padding: unset;
+    }
+    #tooltip-user-heading{
+        top: -1%;
+        left: 47%;
+    }
+    .artx-THIRD-form{
+        left: 25px;
+        top: -30PX;
+    }
+    #tooltip-group-heading{
+        left: -200px;
+    }
+    .artx-FOURTH-form{
+        left: -100px;
+    }
+    .additional-container-step4 .additional-block-content{
+        top: 290px;
+        left: -570px;
+        height: 168px;
+        background: unset;
+        padding: unset;
+    }
+    /*.Pportfolio-group-heading{*/
+    /*    top: -180px;*/
+    /*    left: -96px;*/
+    /*}*/
+    #upload-file-tooltip-heading{
+        top: -180px;
+        left: -96px;
+    }
+    .user-information-carousel-bottom-step5{
+        position: absolute;
+        bottom: 10px;
+    }
+    .artx-FIFTH-form{
+        top: 7px;
+        left: 95px;
+    }
+    .additional-container-step5 .additional-block-content{
+        height: 180px;
+        top: 380px;
+        left: -560px;
+        background: unset;
+        padding: unset;
+    }
+}
+
+
 @media(max-width:767px) {
     .credit-points {
         position: relative;
@@ -2561,4 +2716,57 @@ select#rtSelectPrivacy:nth-child(3) {
         font-size: 14px;
         line-height: 18px;
     }
+    .textarea-contnt{
+        height: 373PX;
+        left: -40px;
+        top: 20px;
+    }
+    .story-svg svg {
+        width: 470px;
+        height: 380px;
+    }
+    #add_to_group_btn{
+        left: -80px;
+    }
+    .artx-THIRD-form .artx-form-common{
+                left: 65%;
+    }
+    .artx-SECOND-form .artx-form-common{
+        width: 318px;
+        
+    }
+    .tooltiptext{
+        position: absolute;
+        top: 36%;
+        left: 12%;
+        width: 120px;
+        overflow-y: scroll;
+        height: 60px;
+    }
+    #tooltip-block-heading{
+        top: -3%;
+        left: 57%;
+    }
+    .artx-THIRD-form .artx-form-common h4{
+        font-size: 14px;
+        padding-bottom: 18px;
+    }
+    #tooltip-group-heading .tooltiptext{
+                position: absolute;
+            top: 36%;
+            left: -85%;
+            width: 100px;
+            overflow-y: scroll;
+            height: 60px;
+    }
+    .tooltiptext h4{
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 19.4px;
+    }
+}
+
+
+.user-information-carousel-bottom.user-detail {
+    overflow: hidden;
 }
