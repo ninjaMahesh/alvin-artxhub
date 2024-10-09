@@ -1680,7 +1680,7 @@ select#rtSelectPrivacy:nth-child(3) {
     height: 76px;
 }
 #tooltip-block-heading {
-    top: -4%;
+    top: -6%;
     left: 47%;
 }
 #tooltip-user-heading{
@@ -1704,12 +1704,22 @@ select#rtSelectPrivacy:nth-child(3) {
 #invitation-heading{
     top: -5px;
 }
+#user-information-heading{
+    top: -5px;
+}
+#tooltip-user-heading{
+    top: -2%;
+    left: 48%;
+}
 @media(max-width:767px) {
     .ArtX-heading h2 {
         font-size: 50px;
     }
 
     #invitation-heading{
+        top: 0;
+    }
+    #user-information-heading{
         top: 0;
     }
     .ArtX-heading p {

@@ -107,62 +107,81 @@ $('#phone_number').on('keypress', function (e) {
 
 
 function debounce(func, delay) {
-    let timer;
-    return function() {
-        const context = this;
-        const args = arguments;
-        clearTimeout(timer);
-        timer = setTimeout(() => {
-            func.apply(context, args);
-        }, delay);
+    let timeout;
+    return function(...args) {
+        clearTimeout(timeout);
+        timeout = setTimeout(() => func.apply(this, args), delay);
     };
 }
 
-
 $(document).ready(function() {
-    $('#invitation-heading').hover(
-        function() {
-            console.log('inside');
-            $('#tooltip-block-heading').show();  // Show the div on hover
-            $('#tooltip-block-heading').css('pointer-events', 'all');  // Enable pointer events
-        },
+//   $('#invitation-heading').hover(
+        // function() {
+        //     console.log('inside');
+        //     $('#tooltip-block-heading').show();  // Show the div on hover
+        //     $('#tooltip-block-heading').css('pointer-events', 'all');  // Enable pointer events
+        // },
         // debounce(function() {
-        // //     console.log('outside');
-        // //     $('#tooltip-block-heading').hide();  // Hide the div when no longer hovering
-        // //     $('#tooltip-block-heading').css('pointer-events', 'none');  // Disable pointer events
-        // // }, 200)
-    );
+        //     console.log('outside');
+        //     $('#tooltip-block-heading').hide();  // Hide the div when no longer hovering
+        //     $('#tooltip-block-heading').css('pointer-events', 'none');  // Disable pointer events
+        // }, 200)
+    // );
+        document.querySelector('#invitation-heading').addEventListener('mouseover',(event)=>{
+            document.querySelector('#tooltip-block-heading').style.display = "block";
+        });
+        document.querySelector('#invitation-heading').addEventListener('mouseout',(event)=>{
+            document.querySelector('#tooltip-block-heading').style.display = "none";
+        });
+        document.querySelector('#tooltip-block-heading').addEventListener('mouseover',(event)=>{
+            document.querySelector('#tooltip-block-heading').style.display = "block";
+        });
 
+        document.querySelector('#tooltip-block-heading').addEventListener('mouseout',(event)=>{
+            document.querySelector('#tooltip-block-heading').style.display = "none";
+        });
+    // $('#hover-for-email').hover(
+    //     function() {
+    //         $('#tooltip-block-email').show();  // Show the div on hover
+    //     },
+    //     function() {
+    //         $('#tooltip-block-email').hide();  // Hide the div when no longer hovering
+    //     }
+    // );
 
-
-    $('#hover-for-email').hover(
-    function() {
-        $('#tooltip-block-email').show();  // Show the div on hover
-    },
-    function() {
-        $('#tooltip-block-email').hide();  // Hide the div when no longer hovering
-    }
-);
-
-$('#hover-for-incitatincode').hover(
-    function() {
-        $('#tooltip-block-invitatincode').show();
-    },
-    function() {
-        $('#tooltip-block-invitatincode').hide();
-    }
-);
+    // $('#hover-for-incitatincode').hover(
+    //     function() {
+    //         $('#tooltip-block-invitatincode').show();
+    //     },
+    //     function() {
+    //         $('#tooltip-block-invitatincode').hide();
+    //     }
+    // );
 
 // Code for 2nd step user information
 
-$('#user-information-heading').hover(
-    function() {
-        $('#tooltip-user-heading').show();
-    },
-    function() {
-        $('#tooltip-user-heading').hide();
-    }
-);
+// $('#user-information-heading').hover(
+//     function() {
+//         $('#tooltip-user-heading').show();
+//     },
+//     function() {
+//         $('#tooltip-user-heading').hide();
+//     }
+// );
+
+        document.querySelector('#user-information-heading').addEventListener('mouseover',(event)=>{
+            document.querySelector('#tooltip-user-heading').style.display = "block";
+        });
+        document.querySelector('#user-information-heading').addEventListener('mouseout',(event)=>{
+            document.querySelector('#tooltip-user-heading').style.display = "none";
+        });
+        document.querySelector('#tooltip-user-heading').addEventListener('mouseover',(event)=>{
+            document.querySelector('#tooltip-user-heading').style.display = "block";
+        });
+
+        document.querySelector('#tooltip-user-heading').addEventListener('mouseout',(event)=>{
+            document.querySelector('#tooltip-user-heading').style.display = "none";
+        });
 
 // $('#hover-for-firstname').hover(
 //     function() {
